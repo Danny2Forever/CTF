@@ -28,6 +28,45 @@ export async function submitCreateCourseForm(formData: FormData) {
         message: "Course name and description are required",
         courseId: undefined,
       };
+
+        console.log(validateCourseData)
+        console.log("JSON", JSON.stringify(validateCourseData))
+
+
+        // POST here
+        const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+
+        const response = await fetch("http://141.11.158.213:3000/api/courses", {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                course_name: validateCourseData.data.course_name,
+                course_description: validateCourseData.data.course_description
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch courses')
+        }
+
+        const data: CreateCourseResponse = await response.json()
+        // Simulate creating a course with a random ID
+        console.log("Course created with ID:", data.courseId);
+
+
+        return {
+            message: data.message,
+            courseId: data.courseId
+        };
+    } catch (e) {
+        console.error("Submit Form Error:", e);
+        return {
+            message: "Submit Form Error, Please try again",
+            courseId: undefined
+        };
     }
 
     // POST here
@@ -56,11 +95,27 @@ const problemSchema = z.object({
 export async function submitCreateProblemForm(formData: FormData) {
   console.log("Creat problem Form submission started"); // Add this log to track execution
 
-  try {
-    const rawProblemData: CreateProblemData = {
-      pro_name: formData.get("pro_name") as string,
-      pro_description: formData.get("pro_description") as string,
-    };
+    try {
+        const rawProblemData: CreateProblemData = {
+            pro_name: formData.get('pro_name') as string,
+            pro_description: formData.get('pro_description') as string
+        }
+
+        console.log("Raw Problem Data", rawProblemData);
+
+        const validateProblemData = problemSchema.safeParse(rawProblemData);
+
+        if (!validateProblemData.success) {
+            console.log("Validation failed:", validateProblemData.error.format());
+            return {
+                message: "Problem name and description are required",
+                pro_id: undefined
+            };
+        }
+
+        // POST here
+        const newProblemId = Math.floor(Math.random() * 1000);
+        console.log("Problem created with ID:", newProblemId);
 
     console.log("Raw Problem Data", rawProblemData);
 

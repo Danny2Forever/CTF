@@ -8,7 +8,7 @@ const navigationItems = [
 
 const AdminSidebar = () => {
     return (
-        <div className="w-1/4">
+        <div className="w-1/6">
             <nav className="space-y-4">
                 {navigationItems.map((item) => (
                     <a

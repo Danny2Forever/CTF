@@ -20,7 +20,7 @@ const AdminPanelPage = () => {
                 <AdminSidebar />
 
                 {/* Main Content Area */}
-                <div className="w-3/4 bg-[#D9D9D9] p-6 rounded-4xl">
+                <div className="w-full bg-[#D9D9D9] p-6 rounded-4xl">
                     <div className="flex justify-end mb-4">
                         <Button onClick={() => router.push("admin-panel/create-course")} variant="outline" className="bg-white rounded-full px-8 cursor-pointer">
                             create new course
