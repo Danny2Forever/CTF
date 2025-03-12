@@ -5,7 +5,7 @@ import AdminSidebar from '@/components/admin/sidebar/AdminSidebar'
 const CreateProblemPage = () => {
   return (
     <div className="max-w-7xl mx-auto mt-8">
-            <h1 className="text-3xl text-center mb-8">admin panel</h1>
+            <h1 className="text-3xl text-center mb-8">create problem</h1>
 
             <div className="flex gap-6">
                 {/* Sidebar Navigation */}

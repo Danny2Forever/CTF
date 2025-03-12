@@ -2,10 +2,8 @@ import React from 'react'
 
 const navigationItems = [
     { label: 'Admin Panel', path: '/admin-panel' },
-    { label: 'Manage Course', path: '/admin/manage-courses' },
     { label: 'Create Problem', path: '/admin-panel/create-problem' },
     { label: 'Create Course', path: '/admin-panel/create-course' },
-    { label: 'student', path: '/admin/students' }
 ];
 
 const AdminSidebar = () => {

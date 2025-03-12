@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useActionState } from 'react'
+import React, { useActionState, useEffect } from 'react'
 import { submitCreateCourseForm } from '@/actions/actions'
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card"
 import { CreateCourseResponse } from '../../../../types/course'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useRouter } from 'next/navigation'
 
 const initialState: CreateCourseResponse = {
     message: '',
@@ -22,11 +23,18 @@ const initialState: CreateCourseResponse = {
 }
 
 const CreateCourseForm = () => {
+    const router = useRouter();
     const [state, action, isPending] = useActionState(
         async (state: CreateCourseResponse, formData: FormData) => await submitCreateCourseForm(formData),
         initialState
     )
     const hasError = state.message && !state.courseId
+
+    useEffect(() => {
+            if (state.courseId && !hasError && !isPending) {
+                window.location.href = '/admin-panel';
+            }
+        }, [state.courseId, hasError, isPending]);
 
     return (
         <Card className="w-full">
@@ -66,7 +74,14 @@ const CreateCourseForm = () => {
                             />
                         </div>
                         <div className="flex justify-between">
-                            <Button type="button" variant="outline" className='cursor-pointer'>Cancel</Button>
+                            <Button 
+                            type="button" 
+                            variant="outline" 
+                            className='cursor-pointer'
+                            onClick={router.back}
+                            >
+                                Cancel
+                            </Button>
                             <Button 
                                 type="submit"
                                 disabled={isPending} 

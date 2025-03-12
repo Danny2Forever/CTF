@@ -15,5 +15,16 @@ export type CreateProblemData = {
 
 export type CreateProblemResponse = {
     message: string;
-    pro_id?: number;
+    pro_id: number | undefined;
+}
+
+export type FileUploadData = {
+    problem_name: string;
+    problem_id: number;
+    file: File;
+}
+
+export type FileUploadResult = {
+    message: string;
+    key: string | undefined;
 }

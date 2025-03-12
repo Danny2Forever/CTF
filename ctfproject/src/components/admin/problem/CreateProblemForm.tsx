@@ -1,90 +1,111 @@
-"use client"
+'use client';
 
-import React, { useActionState, useEffect } from 'react'
-import { submitCreateProblemForm } from '@/actions/actions'
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Button } from '@/components/ui/button'
+import React, { useState } from 'react';
+import { submitCreateProblemForm } from '@/actions/actions';
+import UploadFileCard from '@/components/admin/problem/UploadFileCard';
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
-import { CreateProblemResponse } from '../../../../types/problem'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-
-const initialState: CreateProblemResponse = {
-    message: '',
-    pro_id: undefined
-}
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const CreateProblemForm = () => {
-    const [state, action, isPending] = useActionState(
-        async (state: CreateProblemResponse, formData: FormData) => await submitCreateProblemForm(formData),
-        initialState
-    )
-    const hasError = state.message && !state.pro_id
+  const [problemName, setProblemName] = useState('');
+  const [problemDescription, setProblemDescription] = useState('');
+  const [problemId, setProblemId] = useState<number | null>(null);
+  const [message, setMessage] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
 
-    useEffect(() => {
-        if (state.pro_id && !hasError && !isPending) {
-            window.location.href = '/admin-panel/create-problem/upload';
-        }
-    }, [state.pro_id, hasError, isPending]);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsCreating(true);
 
-    return (
-        <Card className="w-full">
-            <CardHeader>
-                <CardTitle>Create Course</CardTitle>
-                <CardDescription>Learning have no limit, but brain</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <form action={action}>
-                    <div className="grid w-full items-center gap-4">
-                        {hasError && (
-                            <Alert variant="destructive" className="mb-4 bg-red-50 text-red-800 border-red-200">
-                                <AlertDescription>{state.message}</AlertDescription>
-                            </Alert>
-                        )}
-                        {state.pro_id && (
-                            <Alert className="mb-4 bg-green-50 text-green-800 border-green-200">
-                                <AlertDescription>{state.message}</AlertDescription>
-                            </Alert>
-                        )}
-                        <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="pro_name">Problem Name</Label>
-                            <Input
-                                id="pro_name"
-                                name="pro_name"
-                                placeholder="Name of your problem"
-                                className={hasError ? "border-red-500" : ""}
-                            />
-                        </div>
-                        <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="pro_description">Problem Description</Label>
-                            <Textarea
-                                id="pro_description"
-                                name="pro_description"
-                                placeholder="Problem description"
-                                className={hasError ? "border-red-500" : ""}
-                            />
-                        </div>
-                        <div className="flex justify-between">
-                            <Button type="button" variant="outline" className='cursor-pointer'>Cancel</Button>
-                            <Button
-                                type="submit"
-                                disabled={isPending}
-                                className="bg-[#D9D9D9] text-black cursor-pointer hover:bg-black hover:text-white transition-all">
-                                {isPending ? "Going..." : "Next"}
-                            </Button>
-                        </div>
-                    </div>
-                </form>
-            </CardContent>
-        </Card>
-    )
-}
+    const formData = new FormData();
+    formData.append('pro_name', problemName);
+    formData.append('pro_description', problemDescription);
 
-export default CreateProblemForm
+    try {
+      const result = await submitCreateProblemForm(formData);
+      
+      if (result.pro_id) {
+        setProblemId(result.pro_id);
+        setMessage(result.message);
+      } else {
+        setMessage(result.message || 'Problem creation failed');
+      }
+    } catch (error) {
+      setMessage('An error occurred. Please try again.');
+      console.error(error);
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
+  if (problemId) {
+    return <UploadFileCard pro_id={problemId.toString()} />;
+  }
+
+  return (
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>Create New Problem</CardTitle>
+        <CardDescription>
+          Fill in the details to create a new problem
+        </CardDescription>
+      </CardHeader>
+      <form onSubmit={handleSubmit}>
+        <CardContent>
+          <div className="grid gap-4 py-2">
+            {message && (
+              <Alert className="mb-4 bg-red-50 text-red-800 border-red-200">
+                <AlertDescription>{message}</AlertDescription>
+              </Alert>
+            )}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="pro_name" className="text-right">
+                Problem Name
+              </Label>
+              <Input
+                id="pro_name"
+                value={problemName}
+                onChange={(e) => setProblemName(e.target.value)}
+                className={`col-span-3 ${message && !problemName && "border-red-500"}`}
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="pro_description" className="text-right">
+                Description
+              </Label>
+              <Textarea
+                id="pro_description"
+                value={problemDescription}
+                onChange={(e) => setProblemDescription(e.target.value)}
+                className={`col-span-3 ${message && !problemDescription && "border-red-500"}`}
+                rows={4}
+              />
+            </div>
+          </div>
+        </CardContent>
+        <CardFooter className="flex justify-end">
+          <Button
+            type="submit"
+            disabled={isCreating}
+            className="bg-[#D9D9D9] text-black cursor-pointer hover:bg-black hover:text-white transition-all"
+          >
+            {isCreating ? "Creating..." : "Create Problem"}
+          </Button>
+        </CardFooter>
+      </form>   
+    </Card>
+  );
+};
+
+export default CreateProblemForm;
