@@ -1,7 +1,7 @@
 "use server"
 
 import { CreateProblemData } from '../../types/problem';
-import { CreateCourseData } from '../../types/course';
+import { CreateCourseData, CreateCourseResponse } from '../../types/course';
 import { z } from 'zod';
 
 const courseSchema = z.object({
@@ -30,15 +30,37 @@ export async function submitCreateCourseForm(formData: FormData) {
             };
         }
 
+        console.log(validateCourseData)
+        console.log("JSON", JSON.stringify(validateCourseData))
+
+
         // POST here
+        const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+
+        const response = await fetch("http://141.11.158.213:3000/api/courses", {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                course_name: validateCourseData.data.course_name,
+                course_description: validateCourseData.data.course_description
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch courses')
+        }
+
+        const data: CreateCourseResponse = await response.json()
         // Simulate creating a course with a random ID
-        const newCourseId = Math.floor(Math.random() * 1000);
-        console.log("Course created with ID:", newCourseId);
+        console.log("Course created with ID:", data.courseId);
 
 
         return {
-            message: "Course created successfully",
-            courseId: newCourseId
+            message: data.message,
+            courseId: data.courseId
         };
     } catch (e) {
         console.error("Submit Form Error:", e);
@@ -76,11 +98,11 @@ export async function submitCreateProblemForm(formData: FormData) {
                 pro_id: undefined
             };
         }
-        
+
         // POST here
         const newProblemId = Math.floor(Math.random() * 1000);
         console.log("Problem created with ID:", newProblemId);
-        
+
 
         return {
             message: "Problem created successfully",

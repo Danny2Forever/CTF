@@ -1,0 +1,40 @@
+// This hook handles the data fetching logic
+import { useState, useEffect } from 'react'
+import { AllCourses } from '../../../../types/course'
+
+export function getAllCourses() {
+    const [courses, setCourses] = useState<AllCourses>([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<Error | null>(null)
+
+    useEffect(() => {
+        async function fetchCourses() {
+            try {
+                const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+                
+                const response = await fetch("http://141.11.158.213:3000/api/courses/all", {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch courses')
+                }
+
+                const data: AllCourses = await response.json()
+                setCourses(data)
+                setIsLoading(false)
+            } catch (err) {
+                setError(err instanceof Error ? err : new Error('An unknown error occurred'))
+                setIsLoading(false)
+            }
+        }
+
+        fetchCourses()
+    }, [])
+
+    return { courses, isLoading, error }
+}
