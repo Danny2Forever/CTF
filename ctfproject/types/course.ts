@@ -1,7 +1,7 @@
 export type Course = {
     course_id: number; // course id
     course_name: string; // course name
-    course_description: string; // course description
+    description: string; // course description
     created_by: number; // user id who created the course
 }
 
