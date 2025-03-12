@@ -16,20 +16,29 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { useRouter } from 'next/navigation'
 
 interface UploadFileCardProps {
+    pro_name: string;
     pro_id: string;
 }
 
-const UploadFileCard: React.FC<UploadFileCardProps> = ({ pro_id }) => {
+const UploadFileCard: React.FC<UploadFileCardProps> = ({ pro_name, pro_id }) => {
     const router = useRouter();
     const [uploadedFileName, setUploadedFileName] = useState<File | string>("Upload File");
     const [error, setError] = useState<string | null>(null);
     const [isSaving, setIsSaving] = useState<boolean>(false);
     const [success, setSuccess] = useState<string | null>(null);
+    const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+    
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUploadedFileName(e.target.files?.[0]?.name || "Upload File");
-        setError(null); // Clear error when a file is selected
-        setSuccess(null); // Clear success message when a new file is selected
+      if (e.target.files && e.target.files.length > 0) {
+        setUploadedFile(e.target.files[0]);
+        setUploadedFileName(e.target.files[0].name);
+      } else {
+        setUploadedFile(null);
+        setUploadedFileName("Upload File");
+      }
+      setError(null);
+      setSuccess(null);
     };
 
     const handleSaveChanges = async () => {
@@ -43,13 +52,33 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({ pro_id }) => {
         
         try {
             // Simulate a POST request
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            // Any additional logic you want to perform on save
-            console.log("File saved:", uploadedFileName);
-            console.log("For problem ID:", pro_id);
-            
-            setSuccess(`File successfully uploaded for Problem #${pro_id}`);
+            try {
+                const formData = new FormData();
+                formData.append("problemName", pro_name);
+                formData.append("problemID", pro_id);
+                if (uploadedFile) {
+                  formData.append("file", uploadedFile);
+                  console.log(typeof(uploadedFile)) // Use the File object
+                }
+                console.log("Form Data:", formData.get("problemName"), formData.get("problemID"), formData.get("file"));
+                const res = await fetch(
+                  "http://141.11.158.213:3000/api/docker/upload-image",
+                  {
+                    method: "POST",
+                    body: JSON.stringify(formData)
+                  }
+                );
+                // const data = await res.json();
+                setSuccess(`File successfully uploaded for Problem #${pro_id}`);
+                return;
+                // console.log("File uploaded successfully");
+                // console.log("Response:", data);
+                // return data;
+            } catch (error) {
+                console.error("Error uploading file:", error);
+                setError("Failed to upload file. Please try again.");
+                return;
+            }
             // You can choose to redirect after success or stay on the same page
             // router.push("/admin-panel")
         } catch (error) {
@@ -57,7 +86,7 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({ pro_id }) => {
             console.error("Upload error:", error);
         } finally {
             setIsSaving(false);
-            router.push("/admin-panel")
+            // router.push("/admin-panel")
         }
     };
 

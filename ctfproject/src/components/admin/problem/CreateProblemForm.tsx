@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const CreateProblemForm = () => {
-  const [problemName, setProblemName] = useState('');
+  const [problemName, setProblemName] = useState<string | undefined>('');
   const [problemDescription, setProblemDescription] = useState('');
   const [problemId, setProblemId] = useState<number | null>(null);
   const [message, setMessage] = useState('');
@@ -29,13 +29,14 @@ const CreateProblemForm = () => {
     setIsCreating(true);
 
     const formData = new FormData();
-    formData.append('pro_name', problemName);
+    formData.append('pro_name', problemName as string);
     formData.append('pro_description', problemDescription);
 
     try {
       const result = await submitCreateProblemForm(formData);
       
       if (result.pro_id) {
+        setProblemName(result.pro_name);
         setProblemId(result.pro_id);
         setMessage(result.message);
       } else {
@@ -50,7 +51,7 @@ const CreateProblemForm = () => {
   };
 
   if (problemId) {
-    return <UploadFileCard pro_id={problemId.toString()} />;
+    return <UploadFileCard pro_name={problemName || ''} pro_id={problemId.toString()} />;
   }
 
   return (
