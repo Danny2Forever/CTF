@@ -1,7 +1,7 @@
 "use server";
 
-import { CreateProblemData } from "../../types/problem";
-import { CreateCourseData } from "../../types/course";
+import { CreateProblemData, CreateProblemResponse } from "../../types/problem";
+import { CreateCourseData, CreateCourseResponse } from "../../types/course";
 import { z } from "zod";
 
 const courseSchema = z.object({
@@ -14,7 +14,7 @@ export async function submitCreateCourseForm(formData: FormData) {
 
   try {
     const rawCourseData: CreateCourseData = {
-      course_name: formData.get("course_name") as string,
+      course_name: (formData.get("course_name") as string).toLowerCase().replace(/\s+/g, '_'),
       course_description: formData.get("course_description") as string,
     };
 
@@ -28,61 +28,46 @@ export async function submitCreateCourseForm(formData: FormData) {
         message: "Course name and description are required",
         courseId: undefined,
       };
-
-        console.log(validateCourseData)
-        console.log("JSON", JSON.stringify(validateCourseData))
-
-
-        // POST here
-        const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
-
-        const response = await fetch("http://141.11.158.213:3000/api/courses", {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                course_name: validateCourseData.data.course_name,
-                course_description: validateCourseData.data.course_description
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch courses')
-        }
-
-        const data: CreateCourseResponse = await response.json()
-        // Simulate creating a course with a random ID
-        console.log("Course created with ID:", data.courseId);
-
-
-        return {
-            message: data.message,
-            courseId: data.courseId
-        };
-    } catch (e) {
-        console.error("Submit Form Error:", e);
-        return {
-            message: "Submit Form Error, Please try again",
-            courseId: undefined
-        };
     }
 
+    console.log(validateCourseData)
+    console.log("JSON", JSON.stringify(validateCourseData))
+
+
     // POST here
+    const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+
+    const response = await fetch("http://141.11.158.213:3000/api/courses", {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        course_name: validateCourseData.data.course_name,
+        course_description: validateCourseData.data.course_description
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch courses')
+    }
+
+    const data: CreateCourseResponse = await response.json()
     // Simulate creating a course with a random ID
-    const newCourseId = Math.floor(Math.random() * 1000);
-    console.log("Course created with ID:", newCourseId);
+    console.log("Course created with ID:", data.courseId);
+
 
     return {
-      message: "Course created successfully",
-      courseId: newCourseId,
+      message: data.message,
+      courseId: data.courseId
     };
+
   } catch (e) {
     console.error("Submit Form Error:", e);
     return {
       message: "Submit Form Error, Please try again",
-      courseId: undefined,
+      courseId: undefined
     };
   }
 }
@@ -95,27 +80,11 @@ const problemSchema = z.object({
 export async function submitCreateProblemForm(formData: FormData) {
   console.log("Creat problem Form submission started"); // Add this log to track execution
 
-    try {
-        const rawProblemData: CreateProblemData = {
-            pro_name: formData.get('pro_name') as string,
-            pro_description: formData.get('pro_description') as string
-        }
-
-        console.log("Raw Problem Data", rawProblemData);
-
-        const validateProblemData = problemSchema.safeParse(rawProblemData);
-
-        if (!validateProblemData.success) {
-            console.log("Validation failed:", validateProblemData.error.format());
-            return {
-                message: "Problem name and description are required",
-                pro_id: undefined
-            };
-        }
-
-        // POST here
-        const newProblemId = Math.floor(Math.random() * 1000);
-        console.log("Problem created with ID:", newProblemId);
+  try {
+    const rawProblemData: CreateProblemData = {
+      pro_name: formData.get('pro_name') as string,
+      pro_description: formData.get('pro_description') as string
+    }
 
     console.log("Raw Problem Data", rawProblemData);
 
@@ -125,17 +94,23 @@ export async function submitCreateProblemForm(formData: FormData) {
       console.log("Validation failed:", validateProblemData.error.format());
       return {
         message: "Problem name and description are required",
-        pro_id: undefined,
+        pro_id: undefined
       };
     }
 
+    // POST here
+    const newProblemId = Math.floor(Math.random() * 1000);
+    console.log("Problem created with ID:", newProblemId);
+
     try {
+  
+      const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
       const response = await fetch("http://141.11.158.213:3000/api/problems/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImdsb2JhbFBlcm1pc3Npb25zIjpbImFjY2Vzc19hbGxfY291cnNlcyIsImNyZWF0ZV9jb3Vyc2UiLCJkZWxldGVfY291cnNlIiwibWFuYWdlX3VzZXJzIl0sImNvdXJzZVBlcm1pc3Npb25zIjpbeyJjb3Vyc2VJZCI6NCwicGVybWlzc2lvbnMiOlsiYWRkX3Byb2JsZW0iLCJlZGl0X2NvdXJzZSIsImdyYWRlX2Fzc2lnbm1lbnRzIl19LHsiY291cnNlSWQiOjUsInBlcm1pc3Npb25zIjpbImFkZF9wcm9ibGVtIiwiZWRpdF9jb3Vyc2UiLCJncmFkZV9hc3NpZ25tZW50cyJdfSx7ImNvdXJzZUlkIjo2LCJwZXJtaXNzaW9ucyI6WyJhZGRfcHJvYmxlbSIsImVkaXRfY291cnNlIiwiZ3JhZGVfYXNzaWdubWVudHMiXX0seyJjb3Vyc2VJZCI6NywicGVybWlzc2lvbnMiOlsiYWRkX3Byb2JsZW0iLCJlZGl0X2NvdXJzZSIsImdyYWRlX2Fzc2lnbm1lbnRzIl19LHsiY291cnNlSWQiOjgsInBlcm1pc3Npb25zIjpbImFkZF9wcm9ibGVtIiwiZWRpdF9jb3Vyc2UiLCJncmFkZV9hc3NpZ25tZW50cyJdfSx7ImNvdXJzZUlkIjo5LCJwZXJtaXNzaW9ucyI6WyJhZGRfcHJvYmxlbSIsImVkaXRfY291cnNlIiwiZ3JhZGVfYXNzaWdubWVudHMiXX0seyJjb3Vyc2VJZCI6MywicGVybWlzc2lvbnMiOlsidmlld19ncmFkZXMiXX1dLCJpYXQiOjE3NDE3ODMyNTksImV4cCI6MTc0MTc4Njg1OX0.lj76efDjSWwUhrxFjdmD0F5eZIJxrB6FoFrpbnBg5ZM", //! change it to user token + localStorage.getItem("token"),
+            `Bearer ${token}`
         },
         body: JSON.stringify({
           pro_name: validateProblemData.data.pro_name,
@@ -152,12 +127,12 @@ export async function submitCreateProblemForm(formData: FormData) {
         pro_id: data.pro_id,
       }
     } catch (error) {
-        console.error("Error creating problem:", error);
-        return {
-            message: "Problem creation failed",
-            pro_name: undefined,
-            pro_id: undefined,
-        };
+      console.error("Error creating problem:", error);
+      return {
+        message: "Problem creation failed",
+        pro_name: undefined,
+        pro_id: undefined,
+      };
     }
   } catch (e) {
     console.error("Submit Form Error:", e);
