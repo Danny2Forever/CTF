@@ -2,24 +2,23 @@
 import React, { useState } from "react";
 import { File, Lightbulb } from "lucide-react";
 import HintPopUp from "./HintPopUp"; // Import the popup component
-import Information from "./Information";
 
 const QuizProblem = () => {
   const [selectedDot, setSelectedDot] = useState(0); // State for selected dot
-  const [isPopupVisible, setIsPopupVisible] = useState(false); // State for popup visibility
+  const [isHintVisible, setIsHintVisible] = useState(false); // State for popup visibility
 
   const numberOfQuizzes = 5; // Number of quizzes
 
-  const handleDotClick = (index) => {
+  const handleDotClick = (index: number) => {
     setSelectedDot(index); // Update the selected dot when clicked
   };
 
   const handleLightbulbClick = () => {
-    setIsPopupVisible(true); // Show the popup when the lightbulb is clicked
+    setIsHintVisible(true); // Show the popup when the lightbulb is clicked
   };
 
   const handleClosePopup = () => {
-    setIsPopupVisible(false); // Close the popup
+    setIsHintVisible(false); // Close the popup
   };
 
   return (
@@ -67,7 +66,7 @@ const QuizProblem = () => {
       </div>
 
       {/* Pass the visibility state and close function to the AnswerPopUp */}
-      <HintPopUp isVisible={isPopupVisible} onClose={handleClosePopup} />
+      <HintPopUp isVisible={isHintVisible} onClose={handleClosePopup} />
     </div>
   );
 };

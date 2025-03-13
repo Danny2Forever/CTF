@@ -1,9 +1,13 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { MoreHorizontal } from "lucide-react";
 
-const AnswerPopUp = ({ isVisible, onClose }) => {
+interface AnswerPopUpProps {
+  isVisible: boolean;
+  onClose: () => void;
+}
+
+const AnswerPopUp: React.FC<AnswerPopUpProps> = ({ isVisible, onClose }) => {
   const handleBackgroundClick = (e: any) => {
     // Close the popup only when the background (overlay) is clicked, not the content
     if (e.target === e.currentTarget) {
@@ -26,7 +30,8 @@ const AnswerPopUp = ({ isVisible, onClose }) => {
                 <CardTitle className="text-white text-center">Answer</CardTitle>
               </div>
               <Card className="-mt-4">
-                <CardContent className="py-2"></CardContent>
+                <CardContent className="py-2">
+                </CardContent>
               </Card>
             </Card>
           </div>

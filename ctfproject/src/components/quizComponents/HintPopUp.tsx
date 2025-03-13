@@ -1,9 +1,13 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { MoreHorizontal } from "lucide-react";
 
-const HintPopUp = ({ isVisible, onClose }) => {
+interface HintPopUpProps {
+  isVisible: boolean;
+  onClose: () => void;
+}
+
+const HintPopUp: React.FC<HintPopUpProps> = ({ isVisible, onClose }) => {
   // Function to handle click on the background to close the popup
   const handleBackgroundClick = (e: any) => {
     // Close the popup only when the background (overlay) is clicked, not the content
