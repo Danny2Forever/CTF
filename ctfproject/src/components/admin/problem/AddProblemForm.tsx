@@ -125,7 +125,7 @@ const AddProblemForm = ({ courseId }: { courseId: string}) => {
                             <Label htmlFor="due_date" className="text-right">
                                 Due Date
                             </Label>
-                            <div className="col-span-3">
+                            <div className="col-span-1">
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <Button

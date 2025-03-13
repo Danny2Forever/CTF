@@ -72,7 +72,7 @@ const ProblemSelector = ({ onSelectProblem }: ProblemSelectorProps) => {
           <SelectTrigger id="problem_select">
             <SelectValue placeholder={isLoading ? "Loading problems..." : "Select a problem"} />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="max-h-60 overflow-y-auto">
             {error && (
               <SelectItem value="error" disabled>
                 Error loading problems

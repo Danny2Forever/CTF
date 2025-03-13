@@ -16,7 +16,7 @@ const AddProblemPage = () => {
                 <AdminSidebar />
 
                 {/* Main Content Area */}
-                <div className="w-full bg-[#D9D9D9] p-6 rounded-4xl">
+                <div className="w-1/2 bg-[#D9D9D9] p-6 rounded-4xl">
                     <AddProblemForm courseId={course_id}/>
                 </div>
             </div>
