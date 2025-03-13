@@ -120,8 +120,8 @@ const Page = () => {
     },
     {
       icon: <Trophy className="h-8 w-8 text-blue-500 mb-2" />,
-      title: "Compete & Win",
-      description: "Climb the leaderboard and earn rewards for solving complex problems",
+      title: "Play & Win",
+      description: "Complete the course and earn rewards for solving complex problems",
     },
     {
       icon: <Brain className="h-8 w-8 text-blue-500 mb-2" />,
@@ -131,7 +131,7 @@ const Page = () => {
     {
       icon: <Users className="h-8 w-8 text-blue-500 mb-2" />,
       title: "Team Building",
-      description: "Collaborate with peers and build valuable connections in the IT community",
+      description: "Collaborate with peers and build valuable connections in the classroom community",
     },
   ];
 
@@ -153,7 +153,7 @@ const Page = () => {
             Fugaru
           </h1>
           <p className="text-lg text-slate-700 dark:text-slate-300">
-            KMITL School of IT's premier Capture The Flag competition platform. Test your cybersecurity skills, collaborate with peers, and climb the leaderboard.
+            KMITL School of IT's Capture The Flag Learning platform. Test your cybersecurity skills, collaborate with peers, and capture the flag!
           </p>
           <div className="flex flex-wrap gap-4">
             <Button size="lg" onClick={() => router.push("/login")} className="bg-blue-600 hover:bg-blue-700 cursor-pointer hover:scale-105 duration-300 transition">
@@ -196,9 +196,9 @@ const Page = () => {
       {/* Features Section */}
       <section id="feature" className="container mx-auto max-w-6xl px-6 pt-24 md:mt-0">
         <div className="text-center mb-16">
-          <h2 data-aos="fade-up" className="text-3xl md:text-4xl font-bold mb-4">Why Join Our CTF Platform?</h2>
+          <h2 data-aos="fade-up" className="text-3xl md:text-4xl font-bold mb-4">Why Use Fugaru?</h2>
           <p data-aos="fade-up" className="text-primary max-w-2xl mx-auto ">
-            Enhance your cybersecurity skills with real-world challenges designed by KMITL IT faculty
+            Enhance your cybersecurity skills with real-world challenges. 
           </p>
         </div>
         
@@ -240,7 +240,7 @@ const Page = () => {
                 >
                   <div className="w-full md:h-[300px] bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-8">
                     <div className="text-center text-white">
-                      <h3 className="text-xl font-bold mb-8">KMITL CTF Platform</h3>
+                      <h3 className="text-xl font-bold mb-8">Fugaru CTF Platform</h3>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="bg-white/20 col-span-1 rounded-lg p-2">
                           <span className="block text-2xl font-bold">6</span>
@@ -255,7 +255,7 @@ const Page = () => {
                           <span className="text-xs">Access</span>
                         </div>
                       </div>
-                      <Badge className="bg-white/30 text-white hover:bg-white/40 mt-8">Built by KMITL Students</Badge>
+                      <Badge className="bg-white/30 text-white hover:bg-white/40 mt-8">Built by ITKMITL Students</Badge>
                     </div>
                   </div>
                 </motion.div>
@@ -270,7 +270,7 @@ const Page = () => {
               >
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Platform Overview</h2>
                 <p className="text-muted-foreground mb-4">
-                  The KMITL CTF Platform provides students with hands-on cybersecurity experience through a variety of challenges across multiple security domains.
+                  Fugaru provides students with hands-on cybersecurity experience through a variety of challenges across multiple security domains.
                 </p>
                 <ul className="space-y-2 mb-6">
                   <motion.li 
@@ -316,7 +316,7 @@ const Page = () => {
           <div className="lg:w-1/2 space-y-6">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">Active Challenges</h2>
             <p className="text-slate-600 dark:text-slate-400 mb-8">
-              Test your skills across different cybersecurity domains with our diverse set of challenges designed by KMITL's IT faculty.
+              Test your skills across different cybersecurity domains with our diverse set of challenges designed by IT KMITL.
             </p>
             
             <div className="space-y-4">
@@ -398,7 +398,7 @@ const Page = () => {
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Test Your Skills?</h2>
               <p className="text-xl mb-8 max-w-2xl mx-auto">
-                Join the KMITL CTF Platform today and start solving challenges to improve your cybersecurity skills.
+                Join the Fugaru today and start solving challenges to improve your cybersecurity skills.
               </p>
               <Button size="lg" onClick={() => router.push("/register")} className="cursor-pointer hover:scale-105 duration-300 transition">Register Now</Button>
             </div>

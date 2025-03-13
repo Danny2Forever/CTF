@@ -14,9 +14,6 @@ export interface RegisterFormData {
     confirmedPassword: string;
     firstName: string;
     lastName: string;
-    dateOfBirth: string;
-    address: string;
-    telephone: string;
   }
 
   export const VALIDATION_MESSAGES = {
@@ -49,9 +46,6 @@ const Register = () => {
         confirmedPassword: formData.get('confirmedPassword') as string,
         firstName: formData.get('firstName') as string,
         lastName: formData.get('lastName') as string,
-        dateOfBirth: formData.get('dateOfBirth') as string,
-        address: formData.get('address') as string,
-        telephone: formData.get('telephone') as string,
       };
 
       const termsAccepted = (form.elements.namedItem('terms') as HTMLInputElement).checked;
@@ -68,11 +62,6 @@ const Register = () => {
         throw new Error('กรุณายอมรับข้อกำหนดการใช้บริการและความเป็นส่วนตัว');
       }
 
-      const phoneRegex = /^0[0-9]{9}$/;
-      if (!phoneRegex.test(userData.telephone)) {
-        throw new Error('กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง (เช่น 0812345678)');
-      }
-
       const response = await fetch('http://localhost:3000/auth/register', {
         method: 'POST',
         headers: {
@@ -84,9 +73,6 @@ const Register = () => {
           password: userData.password,
           firstName: userData.firstName,
           lastName: userData.lastName,
-          dateOfBirth: userData.dateOfBirth,
-          address: userData.address,
-          telephone: userData.telephone,
         }),
       });
 
@@ -179,39 +165,6 @@ const Register = () => {
                   name="email"
                   className="w-full p-3 border border-gray-300 rounded-xl bg-white"
                   required={true}
-                />
-              </div>
-
-
-              <div className="relative">
-                <input
-                  type="tel"
-                  placeholder="Telephone / เบอร์โทรศัพท์"
-                  name="telephone"
-                  className="w-full p-3 border border-gray-300 rounded-xl bg-white"
-                  required={true}
-                  pattern="0[0-9]{9}"
-                  title="กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง (เช่น 0812345678)"
-                />
-              </div>
-
-              <div className="relative">
-                <input
-                  type="date"
-                  placeholder="Date of Birth / วันเกิด"
-                  name="dateOfBirth"
-                  className="w-full p-3 border border-gray-300 rounded-xl bg-white"
-                  required={true}
-                />
-              </div>
-
-              <div className="relative">
-                <textarea
-                  placeholder="Address / ที่อยู่"
-                  name="address"
-                  className="w-full p-3 border border-gray-300 rounded-xl bg-white"
-                  required={true}
-                  rows={3}
                 />
               </div>
 
