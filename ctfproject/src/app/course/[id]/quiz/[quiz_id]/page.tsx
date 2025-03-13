@@ -2,29 +2,33 @@
 import React, { useState } from "react";
 import QuizProblem from "@/components/quizComponents/QuizProblem";
 import QuizRequire from "@/components/quizComponents/QuizRequire";
-import QuizTerminal from "@/components/quizComponents/QuizTerminal";
 import { Button } from "@/components/ui/button";
 import AnswerPopUp from "@/components/quizComponents/AnswerPopUp";
 
 const page = () => {
-  const [isHintVisible, setIsHintVisible] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsPopupVisible(true); // Show the popup when the button is clicked
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false); // Close the popup when the background is clicked
+  };
   return (
     <>
       <div className="min-screen p-6 flex justify-center items-center">
-        <div className="w-full max-w-7xl flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">
-          {/* Left Side - 50% width on large screens */}
-          <div className="h-[78vh] lg:w-1/2 w-full pb-3">
+        <div className="w-full max-w-7xl flex flex-col lg:flex-row  lg:space-y-0 lg:space-x-8 justify-center">
+
+          <div className="h-[78vh] lg:w-2/3 w-full pb-3">
             <QuizProblem />
           </div>
-
-          {/* Right Side - 50% width on large screens */}
-          <div className="lg:w-1/2 w-full flex flex-col space-y-4">
+          
+          <div className="lg:w-1/3 w-full flex flex-col space-y-4 justify-center items-center">
             <QuizRequire />
-            <QuizTerminal />
             <div className="flex justify-center items-center gap-7">
-              <Button className="w-56 h-11 rounded-4xl">Download</Button>
               <Button
-                onClick={() => setIsHintVisible(true)}
+                onClick={handleButtonClick}
                 className="w-56 h-11 rounded-4xl"
               >
                 Answer
@@ -36,7 +40,7 @@ const page = () => {
       <div className="flex justify-center items-center">
         <div className=" w-3/4 p-6 bg-[#111] rounded-2xl shadow-lg text-white"></div>
       </div>
-      <AnswerPopUp isVisible={isHintVisible} onClose={() => setIsHintVisible(false)} />
+      <AnswerPopUp isVisible={isPopupVisible} onClose={handleClosePopup} />
     </>
   );
 };
