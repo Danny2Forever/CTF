@@ -9,16 +9,16 @@ const page = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const handleButtonClick = () => {
-    setIsPopupVisible(true); // Show the popup when the button is clicked
+    setIsPopupVisible(true);
   };
 
   const handleClosePopup = () => {
-    setIsPopupVisible(false); // Close the popup when the background is clicked
+    setIsPopupVisible(false);
   };
   return (
     <>
       <div className="min-screen p-6 flex justify-center items-center">
-        <div className="w-full max-w-7xl flex flex-col lg:flex-row  lg:space-y-0 lg:space-x-8 justify-center">
+        <div className="w-full max-w-7xl flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8 justify-center">
 
           <div className="h-[78vh] lg:w-2/3 w-full pb-3">
             <QuizProblem />

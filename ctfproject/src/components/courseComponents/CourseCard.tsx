@@ -12,7 +12,7 @@ const CourseCard = ({ course }: { course: Course }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-4xl shadow flex items-center w-full">
+    <div className="bg-white p-4 rounded-4xl flex items-center w-full">
       <div className="w-64 h-64 bg-gray-300 rounded-4xl overflow-hidden">
         {/* Add image or content here */}
       </div>
