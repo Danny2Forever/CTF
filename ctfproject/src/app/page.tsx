@@ -88,6 +88,22 @@ const Page = () => {
       email: "aruchakhem@gmail.com",
       imageUrl: "/api/placeholder/150/150",
     },
+    {
+      name: "P'Nig",
+      studentId: "66070229",
+      role: "Network Specialist TA",
+      githubUrl: "wwww.google.com",
+      email: "aruchakhem@gmail.com",
+      imageUrl: "/api/placeholder/150/150",
+    },
+    {
+      name: "P'Few",
+      studentId: "66070225",
+      role: "Network Specialist TA",
+      githubUrl: "wwww.google.com",
+      email: "aruchakhem@gmail.com",
+      imageUrl: "/api/placeholder/150/150",
+    },
   ];
   interface Feature {
     icon: React.ReactNode;
@@ -214,7 +230,7 @@ const Page = () => {
             viewport={{ once: true }}
           >
             <div className="flex flex-col-reverse md:flex-row items-center">
-              <div className="md:w-1/2 space-y-6 flex items-center mt-10 md:mt-0">
+              <div className="self-start w-full md:w-1/2 space-y-6 flex items-center mt-10 md:mt-0">
                 <motion.div 
                   className="rounded-xl overflow-hidden shadow-lg w-full"
                   initial={{ opacity: 0, x: -30 }}
@@ -222,10 +238,10 @@ const Page = () => {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-full h-[300px] bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-8">
+                  <div className="w-full md:h-[300px] bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-8">
                     <div className="text-center text-white">
                       <h3 className="text-xl font-bold mb-8">KMITL CTF Platform</h3>
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="bg-white/20 col-span-1 rounded-lg p-2">
                           <span className="block text-2xl font-bold">6</span>
                           <span className="text-xs">Categories</span>
@@ -296,9 +312,9 @@ const Page = () => {
 
       {/* Active Challenges Section */}
       <section data-aos="zoom-in-right" className="max-w-6xl mx-auto px-6 bg-white dark:bg-slate-900 rounded-xl shadow-sm mt-42">
-        <div className="flex flex-col md:flex-row pt-8">
-          <div className="md:w-1/2 space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Active Challenges</h2>
+        <div className="flex flex-col lg:flex-row pt-8">
+          <div className="lg:w-1/2 space-y-6">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Active Challenges</h2>
             <p className="text-slate-600 dark:text-slate-400 mb-8">
               Test your skills across different cybersecurity domains with our diverse set of challenges designed by KMITL's IT faculty.
             </p>
@@ -337,8 +353,8 @@ const Page = () => {
             </div>
           </div>
           
-          <div  className="md:w-1/2 flex items-center justify-end mt-10 md:mt-0">
-            <Card className="w-full max-w-md border border-slate-200 dark:border-slate-800">
+          <div className="self-start w-full lg:self-center lg:w-1/2 flex items-center justify-end mt-10 lg:mt-0 mb-10 lg:mb-0">
+            <Card className="w-full lg:max-w-md border border-slate-200 dark:border-slate-800">
               <CardHeader>
                 <div className="flex justify-between items-center">
                   <CardTitle>{challenges[activeChallenge].title}</CardTitle>
@@ -372,7 +388,7 @@ const Page = () => {
               </CardFooter>
             </Card>
           </div>
-          </div>
+        </div>
       </section>
 
         <section data-aos="fade-up" className="mt-42">
@@ -401,7 +417,7 @@ const Page = () => {
               </p>
             </div>
             
-            <div data-aos="fade-in" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div data-aos="fade-in" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {teamMembers.map((member, index) => (
               <TeamMember key={member.studentId} {...member} />
             ))}
