@@ -1,10 +1,9 @@
 import React from "react";
 
-// No props are expected in this component, so no need for custom prop types
 const QuizProblem: React.FC = () => {
   return (
-    <div className="flex-1 bg-[#323232] p-6 rounded-3xl shadow-lg flex flex-col h-full relative">
-      <div className="text-white text-lg font-semibold pb-3 flex justify-center items-center">
+    <div className="flex-1 bg-[#323232] p-8 rounded-3xl shadow-lg flex flex-col h-full relative">
+      <div className="text-white text-lg font-semibold pb-4 flex justify-center items-center">
         Problem
       </div>
       <div
@@ -12,7 +11,10 @@ const QuizProblem: React.FC = () => {
         style={{ maxHeight: "calc(100% - 120px)" }}
       >
         <div className="space-y-4">
-            asdadasd
+          {/* Add your actual problem content here */}
+          <p className="text-gray-800">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.
+          </p>
         </div>
       </div>
     </div>

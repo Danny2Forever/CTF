@@ -18,9 +18,9 @@ const page = () => {
   return (
     <>
       <div className="min-screen p-6 flex justify-center items-center">
-        <div className="w-full max-w-7xl flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8 justify-center">
+        <div className="w-full max-w-7xl flex flex-col lg:flex-row space-y-8 lg:space-y-0  justify-center gap-14">
 
-          <div className="h-[78vh] lg:w-2/3 w-full pb-3">
+          <div className="h-[78vh] w-full pb-3">
             <QuizProblem />
           </div>
           
@@ -29,7 +29,7 @@ const page = () => {
             <div className="flex justify-center items-center gap-7">
               <Button
                 onClick={handleButtonClick}
-                className="w-56 h-11 rounded-4xl"
+                className="w-96 h-11 rounded-4xl"
               >
                 Answer
               </Button>
