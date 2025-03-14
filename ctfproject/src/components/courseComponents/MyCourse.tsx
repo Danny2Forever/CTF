@@ -4,7 +4,7 @@ import AllCourseContainer from "@/components/courseComponents/AllCourseContainer
 import EnrolledCourseContainer from "@/components/courseComponents/EnrolledCourseContainer";
 
 const MyCourse = () => {
-    const [activeView, setActiveView] = useState<"all" | "enrolled">("all");
+    const [activeView, setActiveView] = useState<"all" | "enrolled">("enrolled");
     
     return (
         <div className="min-h-screen flex flex-col items-center p-4 mt-10">
