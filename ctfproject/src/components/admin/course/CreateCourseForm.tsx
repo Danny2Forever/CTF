@@ -77,15 +77,17 @@ const CreateCourseForm = () => {
                             <Button 
                             type="button" 
                             variant="outline" 
-                            className='cursor-pointer'
+                            className='cursor-pointer hover:scale-105 transition duration-300 mt-3'
                             onClick={router.back}
                             >
                                 Cancel
                             </Button>
-                            <Button 
+                            <Button
                                 type="submit"
-                                disabled={isPending} 
-                                className="bg-[#D9D9D9] text-black cursor-pointer hover:bg-black hover:text-white transition-all">
+                                disabled={isPending}
+                                variant="default"
+                                className="cursor-pointer hover:scale-105 transition duration-300 mt-4"
+                            >
                                 {isPending ? "Creating..." : "Create Course"}
                             </Button>
                         </div>
