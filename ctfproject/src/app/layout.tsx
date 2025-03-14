@@ -4,9 +4,6 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
 import AOSProvider from '../components/AOSProvider';
 
-import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/Footer";
-
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
@@ -28,9 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} font-sans`}>
         <AOSProvider>
-        <Navbar />
         {children}
-        <Footer />
         </AOSProvider>
         <Toaster
           theme="light"
