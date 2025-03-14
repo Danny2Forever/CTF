@@ -324,7 +324,7 @@ export default function QuizPage() {
         </div>
       </div>
 
-      <AnswerPopUp isVisible={isPopupVisible} onClose={handleClosePopup} />
+      <AnswerBox onSend={(answer) => console.log("Send :", answer)} />
     </>
   );
 }
