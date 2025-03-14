@@ -78,7 +78,7 @@ const Page = () => {
       studentId: "66070093",
       githubUrl: "https://github.com/Danny2Forever",
       email: "66070093@gmail.com",
-      imageUrl: "itlad.png",
+      imageUrl: "tae.jpg",
     },
     {
       name: "นางสาวศิริกุล คำมุง",
@@ -86,7 +86,7 @@ const Page = () => {
       role: "UX/UI",
       githubUrl: "https://github.com/Imparaloy",
       email: "66070192@gmail.com",
-      imageUrl: "itlad.png",
+      imageUrl: "paloy.jpg",
     },
     {
       name: "นายอรุชา เขมทโรนนท์",
