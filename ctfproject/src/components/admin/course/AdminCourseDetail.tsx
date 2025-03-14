@@ -28,7 +28,7 @@ const AdminCourseDetail = ({ courseId }: { courseId: string }) => {
                 CyberSecurity
               </Badge>
             </div>
-            <h3 className="text-3xl font-bold">{course?.course_name}</h3>
+            <h3 className="text-3xl font-bold">{course?.course_name.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</h3>
             <p className="text-md text-gray-600">Instructor: {user?.first_name} {user?.last_name}</p>
           </div>
         </div>

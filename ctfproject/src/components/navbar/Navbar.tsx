@@ -21,7 +21,7 @@ const Navbar = () => {
           <Link href="/mycourse" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">
             My Course
           </Link>
-          <Link href="/" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">
+          <Link href="/admin-panel" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">
             Admin Panel
           </Link>
           <Link href="/" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">

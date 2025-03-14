@@ -59,7 +59,7 @@ const AddProblemForm = ({ courseId }: { courseId: string}) => {
         // Prepare form data
         const AddProblemData: AddProblemData = {
             pro_id: selectedProblemId,
-            expiration_date: date.toISOString().split('T')[0],
+            expiration_date: new Date(date.getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0],
         };
 
         try {
@@ -95,7 +95,7 @@ const AddProblemForm = ({ courseId }: { courseId: string}) => {
             setFormError("Failed to create problem assignment. Please try again.");
         } finally {
             setIsSubmitting(false);
-            router.push("/admin-panel")
+            router.push(`/admin-panel/admin-course/${courseId}`)
         }
     };
 
@@ -125,7 +125,7 @@ const AddProblemForm = ({ courseId }: { courseId: string}) => {
                             <Label htmlFor="due_date" className="text-right">
                                 Due Date
                             </Label>
-                            <div className="col-span-1">
+                            <div className="col-span-2">
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <Button

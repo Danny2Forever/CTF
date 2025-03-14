@@ -98,10 +98,6 @@ export async function submitCreateProblemForm(formData: FormData) {
       };
     }
 
-    // POST here
-    const newProblemId = Math.floor(Math.random() * 1000);
-    console.log("Problem created with ID:", newProblemId);
-
     try {
   
       const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
@@ -141,9 +137,4 @@ export async function submitCreateProblemForm(formData: FormData) {
       pro_id: undefined,
     };
   }
-}
-
-
-export async function submitAddProblemForm(formData: FormData) {
-
 }
