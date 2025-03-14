@@ -71,8 +71,8 @@ const Register = () => {
           username: userData.username,
           email: userData.email,
           password: userData.password,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
+          first_name: userData.firstName,
+          last_name: userData.lastName,
         }),
       });
 
@@ -100,7 +100,7 @@ const Register = () => {
     } finally {
       setIsLoading(false);
     }
-  };  
+  }; 
 
   return (
     <div className="min-h-screen bg-white flex">
