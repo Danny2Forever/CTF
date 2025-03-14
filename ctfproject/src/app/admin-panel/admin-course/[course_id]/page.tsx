@@ -7,7 +7,6 @@ import AdminSidebar from '@/components/admin/sidebar/AdminSidebar'
 import AdminCourseDetail from '@/components/admin/course/AdminCourseDetail'
 import CourseAllProblem from '@/components/admin/problem/CourseAllProblem'
 import AdminAddProblemButton from '@/components/admin/buttons/AdminAddProblem'
-import AdminAddResourceButton from '@/components/admin/buttons/AdminAddResource'
 
 const page = () => {
     const params = useParams<{ course_id: string }>
@@ -26,7 +25,6 @@ const page = () => {
                     <div className='mx-4'>
                         <div className='flex mb-4 gap-4'>
                             <AdminAddProblemButton courseId={course_id} />
-                            <AdminAddResourceButton courseId={course_id} />
                         </div>
                         <CourseAllProblem courseId={course_id} />
                     </div>

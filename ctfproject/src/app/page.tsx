@@ -138,9 +138,6 @@ const Page = () => {
 
   return (
     <div className="min-h-screen flex flex-col dark:from-slate-950 dark:to-slate-900">
-      <div className="w-full">
-        <Navbar />
-      </div>
       <main id="home" className="container mx-auto max-w-6xl px-6 min-h-screen flex flex-col md:flex-row items-center justify-center">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}

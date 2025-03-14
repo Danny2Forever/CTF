@@ -70,6 +70,7 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({ pro_name, pro_id }) => 
                 );
                 // const data = await res.json();
                 setSuccess(`File successfully uploaded for Problem #${pro_id}`);
+                router.push("/admin-panel")
                 return;
                 // console.log("File uploaded successfully");
                 // console.log("Response:", data);

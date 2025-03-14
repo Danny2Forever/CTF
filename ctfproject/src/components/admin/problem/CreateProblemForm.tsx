@@ -104,7 +104,7 @@ const CreateProblemForm = () => {
             {isCreating ? "Creating..." : "Create Problem"}
           </Button>
         </CardFooter>
-      </form>   
+      </form>
     </Card>
   );
 };

@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
 import AOSProvider from '../components/AOSProvider';
+import Navbar from "@/components/navbar/Navbar";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} font-sans`}>
         <AOSProvider>
+          <Navbar />
         {children}
         </AOSProvider>
         <Toaster
