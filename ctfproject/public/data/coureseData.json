@@ -1,0 +1,131 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "instructor": "T4E",
+      "title": "React Fundamentals",
+      "description": "Learn the fundamentals of React including components, state, and props.",
+      "outlines": [
+        {
+          "id": 1,
+          "question": "What is the capital of France?",
+          "options": ["Paris", "London", "Berlin", "Madrid"],
+          "correctAnswer": "Paris",
+          "hint": "It’s also known as the City of Light"
+        },
+        {
+          "id": 2,
+          "question": "Which planet is known as the Red Planet?",
+          "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+          "correctAnswer": "Mars",
+          "hint": "It’s the fourth planet from the Sun"
+        },
+        {
+          "id": 3,
+          "question": "Who wrote 'To Kill a Mockingbird'?",
+          "options": [
+            "Harper Lee",
+            "J.K. Rowling",
+            "Mark Twain",
+            "F. Scott Fitzgerald"
+          ],
+          "correctAnswer": "Harper Lee",
+          "hint": "The author’s first name is Harper"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "instructor": "Jane Doe",
+      "title": "JavaScript Essentials",
+      "description": "Master JavaScript, from basics to advanced concepts including ES6+ features.",
+      "outlines": [
+        {
+          "id": 1,
+          "question": "Which keyword is used to declare a variable in JavaScript?",
+          "options": ["var", "let", "const", "all of the above"],
+          "correctAnswer": "all of the above",
+          "hint": "JavaScript has multiple ways to declare variables."
+        },
+        {
+          "id": 2,
+          "question": "What is the result of `typeof null`?",
+          "options": ["null", "undefined", "object", "string"],
+          "correctAnswer": "object",
+          "hint": "This is a well-known JavaScript bug."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "instructor": "John Smith",
+      "title": "Python for Beginners",
+      "description": "A beginner-friendly introduction to Python programming.",
+      "outlines": [
+        {
+          "id": 1,
+          "question": "Which data type is used to store multiple items in a single variable?",
+          "options": ["int", "float", "list", "bool"],
+          "correctAnswer": "list",
+          "hint": "It can hold multiple values."
+        },
+        {
+          "id": 2,
+          "question": "What is the correct file extension for Python files?",
+          "options": [".py", ".js", ".java", ".html"],
+          "correctAnswer": ".py",
+          "hint": "Think of the Python programming language."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "instructor": "Emily White",
+      "title": "Full-Stack Web Development",
+      "description": "Learn front-end and back-end development with React and Node.js.",
+      "outlines": [
+        {
+          "id": 1,
+          "question": "Which framework is used for backend development in JavaScript?",
+          "options": ["React", "Vue", "Node.js", "Django"],
+          "correctAnswer": "Node.js",
+          "hint": "It's built on Chrome’s V8 JavaScript engine."
+        },
+        {
+          "id": 2,
+          "question": "Which database is commonly used with MongoDB?",
+          "options": ["SQL", "PostgreSQL", "NoSQL", "Oracle"],
+          "correctAnswer": "NoSQL",
+          "hint": "MongoDB is a document-oriented database."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "instructor": "Michael Brown",
+      "title": "Machine Learning Basics",
+      "description": "Understand the fundamentals of machine learning and neural networks.",
+      "outlines": [
+        {
+          "id": 1,
+          "question": "Which library is widely used for machine learning in Python?",
+          "options": ["TensorFlow", "React", "Bootstrap", "Laravel"],
+          "correctAnswer": "TensorFlow",
+          "hint": "It's developed by Google."
+        },
+        {
+          "id": 2,
+          "question": "What is supervised learning?",
+          "options": [
+            "Training with labeled data",
+            "Training without labeled data",
+            "Training with reinforcement",
+            "A type of cloud computing"
+          ],
+          "correctAnswer": "Training with labeled data",
+          "hint": "It involves providing both input and expected output."
+        }
+      ]
+    }
+  ]
+}
