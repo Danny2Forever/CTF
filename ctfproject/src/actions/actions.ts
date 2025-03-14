@@ -1,6 +1,6 @@
 "use server";
 
-import { CreateProblemData, CreateProblemResponse } from "../../types/problem";
+import { CreateProblemData } from "../../types/problem";
 import { CreateCourseData, CreateCourseResponse } from "../../types/course";
 import { z } from "zod";
 
@@ -141,4 +141,9 @@ export async function submitCreateProblemForm(formData: FormData) {
       pro_id: undefined,
     };
   }
+}
+
+
+export async function submitAddProblemForm(formData: FormData) {
+
 }

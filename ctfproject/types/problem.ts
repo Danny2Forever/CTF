@@ -28,3 +28,13 @@ export type FileUploadResult = {
     message: string;
     key: string | undefined;
 }
+
+export type AddProblemData = {
+    pro_id: number;
+    expiration_date: string;
+}
+
+export type AddProblemResponse = {
+    message: string;
+    pro_cour_id: number | undefined
+}
