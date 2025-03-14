@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner"
-import AOSProvider from '../components/AOSProvider';
+
+import { Toaster } from "@/components/ui/sonner";
+import AOSProvider from "../components/AOSProvider";
+
 import Navbar from "@/components/navbar/Navbar";
 
 const poppins = Poppins({
@@ -27,7 +29,9 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-sans`}>
         <AOSProvider>
           <Navbar />
-        {children}
+
+         {children}
+
         </AOSProvider>
         <Toaster
           theme="light"
@@ -35,13 +39,14 @@ export default function RootLayout({
           className="w-[500px]"
           toastOptions={{
             style: {
-              fontSize: '10px',
-              minWidth: 'fit-content'
+              fontSize: "10px",
+              minWidth: "fit-content",
             },
             classNames: {
-              toast: 'font-line-seed',
-              title: 'text-xs md:text-lg whitespace-nowrap overflow-hidden text-ellipsis',
-              description: 'text-sm',
+              toast: "font-line-seed",
+              title:
+                "text-xs md:text-lg whitespace-nowrap overflow-hidden text-ellipsis",
+              description: "text-sm",
             },
           }}
         />
