@@ -3,10 +3,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import QuizProblem from "@/components/quizComponents/QuizProblem";
 import QuizRequire from "@/components/quizComponents/QuizRequire";
 import { Button } from "@/components/ui/button";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useProblemData } from "@/components/quizComponents/GetProblem";
 import { useCreateContainer } from "@/components/quizComponents/GetContainer";
-import { useContainerUp } from "@/components/quizComponents/GetComposeUp"; // Make sure path is correct
+import { useContainerUp } from "@/components/quizComponents/GetComposeUp";
 import AnswerBox from "@/components/quizComponents/AnswerBox";
 
 type QuizParams = {
@@ -34,6 +34,7 @@ interface QuizRequireProps {
 }
 
 export default function QuizPage() {
+  const router = useRouter();
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [problem, setProblem] = useState<CurrentProblem | undefined>(undefined);
   const [containerInfo, setContainerInfo] = useState<Container>({
@@ -43,6 +44,7 @@ export default function QuizPage() {
   });
   const [shouldStartContainer, setShouldStartContainer] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [isStoppingContainer, setIsStoppingContainer] = useState(false);
 
   // Get URL parameters
   const params = useParams<QuizParams>();
@@ -87,7 +89,6 @@ export default function QuizPage() {
     loading: containerLoading,
     error: containerError,
   } = useCreateContainer(containerInfo);
-  
 
   // Function to manually trigger container startup
   const startContainer = useCallback(() => {
@@ -108,6 +109,48 @@ export default function QuizPage() {
       console.error("Cannot start container - missing data:", containerInfo);
     }
   }, [containerInfo]);
+
+  // Function to stop container and redirect
+  const stopContainer = useCallback(async () => {
+    if (
+      containerInfo.username &&
+      containerInfo.problemName &&
+      containerInfo.problemID
+    ) {
+      try {
+        setIsStoppingContainer(true);
+        console.log("Stopping container with info:", containerInfo);
+
+        // Call API to terminate the container
+        const response = await fetch(
+          "http://141.11.158.213:3000/api/docker/compose-down",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(containerInfo),
+          }
+        );
+
+        if (response.ok) {
+          console.log("Container stopped successfully");
+          // Redirect to mycourse page
+          router.push("/mycourse");
+        } else {
+          console.error("Failed to stop container:", response.statusText);
+          // Still redirect even if there's an error
+          router.push("/mycourse");
+        }
+      } catch (error) {
+        console.error("Error stopping container:", error);
+        // Still redirect even if there's an error
+        router.push("/mycourse");
+      } finally {
+        setIsStoppingContainer(false);
+      }
+    }
+  }, [containerInfo, router]);
 
   // Always call the hook, but control when it performs actions
   const {
@@ -198,7 +241,6 @@ export default function QuizPage() {
     sshpass: sshpass,
   };
 
-
   return (
     <>
       <div className="min-h-screen p-6 flex justify-center items-center -mt-16">
@@ -228,26 +270,42 @@ export default function QuizPage() {
               <Button
                 onClick={startContainer}
                 className="w-96 h-11 rounded-4xl bg-blue-600 hover:bg-blue-700"
-                disabled={!problem || containerLoading || containerUpLoading}
+                disabled={
+                  !problem ||
+                  containerLoading ||
+                  containerUpLoading ||
+                  isStoppingContainer
+                }
               >
                 {containerLoading
                   ? "Setting up environment..."
                   : containerUpLoading
-                    ? "Starting container..."
-                    : "Start Container"}
+                  ? "Starting container..."
+                  : "Start Container"}
               </Button>
+
+              {/* Container stop button */}
+              {containerUpSuccess && (
+                <Button
+                  onClick={stopContainer}
+                  className="w-96 h-11 rounded-4xl bg-red-600 hover:bg-red-700"
+                  disabled={isStoppingContainer}
+                >
+                  {isStoppingContainer
+                    ? "Stopping..."
+                    : "Stop Container & Return"}
+                </Button>
+              )}
 
               {/* Answer box */}
               <AnswerBox
                 onSend={(answer) => {
                   if (answer === flag) {
-
                     setShowSuccessMessage(true);
                   } else {
                     setShowSuccessMessage(false);
                   }
                 }}
-
               />
               {showSuccessMessage && (
                 <div
@@ -302,6 +360,11 @@ export default function QuizPage() {
                     <span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>
                     Running
                   </span>
+                ) : isStoppingContainer ? (
+                  <span className="text-yellow-500 flex items-center">
+                    <span className="inline-block w-3 h-3 rounded-full bg-yellow-500 mr-2 animate-pulse"></span>
+                    Stopping...
+                  </span>
                 ) : (
                   <span className="text-gray-500 flex items-center">
                     <span className="inline-block w-3 h-3 rounded-full bg-gray-500 mr-2"></span>
@@ -326,8 +389,6 @@ export default function QuizPage() {
           </div>
         </div>
       </div>
-
-
     </>
   );
 }
