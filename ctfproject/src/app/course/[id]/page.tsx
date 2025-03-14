@@ -31,8 +31,8 @@ export default function Course() {
   }
     
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4">
-      <div className="bg-[#D9D9D9] w-full max-w-5xl p-6 rounded-lg shadow-lg flex flex-col h-full">
+    <div className="min-h-screen flex flex-col items-center p-4">
+      <div className="bg-white w-full max-w-5xl p-6 rounded-lg shadow-lg flex flex-col h-full">
         <CourseHeader title={course?.course_name} />
         <CourseDescription description={course?.description} />
         <div className="mt-6 flex space-x-4 border-b pb-2">

@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import QuizProblem from "@/components/quizComponents/QuizProblem";
 import QuizRequire from "@/components/quizComponents/QuizRequire";
 import { Button } from "@/components/ui/button";
-import AnswerPopUp from "@/components/quizComponents/AnswerPopUp";
 import { useParams } from "next/navigation";
 import { useProblemData } from "@/components/quizComponents/GetProblem";
+import AnswerBox from "@/components/quizComponents/AnswerBox";
 
 type QuizParams = {
   quiz_id: string;
@@ -61,7 +61,7 @@ export default function QuizPage() {
 
   return (
     <>
-      <div className="min-h-screen p-6 flex justify-center items-center">
+      <div className="min-h-screen p-6 flex justify-center items-center -mt-16">
         <div className="w-full max-w-7xl flex flex-col lg:flex-row space-y-8 lg:space-y-0 justify-center gap-14">
           <div className="h-[78vh] w-full pb-3">
             {loading ? (
@@ -83,19 +83,12 @@ export default function QuizPage() {
 
           <div className="lg:w-1/3 w-full flex flex-col space-y-4 justify-center items-center">
             <QuizRequire />
-            <div className="flex justify-center items-center gap-7">
-              <Button
-                onClick={handleButtonClick}
-                className="w-96 h-11 rounded-4xl"
-                disabled={!problem}
-              >
-                Answer
-              </Button>
-            </div>
+
+            <AnswerBox onSend={(answer) => { console.log("Sent Answer: ", answer); setIsPopupVisible(false); }} />
+
           </div>
         </div>
       </div>
-      <AnswerPopUp isVisible={isPopupVisible} onClose={handleClosePopup} />
     </>
   );
 }
