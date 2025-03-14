@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Problem } from "../../../types/problem";
 
 interface CourseOutlineProps {
-  course_id: number;
+  course_id: number | undefined;
   problem: Problem;
 }
 

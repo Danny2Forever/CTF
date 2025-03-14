@@ -15,7 +15,7 @@ const Page = () => {
         </button>
       </div>
       <EnrolledCourseContainer />
-      <AllCourseContainer />
+      {/* <AllCourseContainer /> */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 
 interface CourseHeaderProps {
-  title: string;
+  title: string | undefined;
 }
 
 const CourseHeader: React.FC<CourseHeaderProps> = ({ title }) => {

@@ -1,7 +1,7 @@
 import React from "react";
 
 interface CourseDescriptionProps {
-  description: string;
+  description: string | undefined;
 }
 
 const CourseDescription: React.FC<CourseDescriptionProps> = ({ description }) => {
