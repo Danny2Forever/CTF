@@ -6,13 +6,12 @@ import { Card, CardContent } from '@/components/ui/card'
 
 interface ProblemTimerProps {
   problem_name?: string;
-  timeRemain?: string;
-  difficulty?: number;
+  due_date: string;
 }
 
 export default function ProblemCard({
   problem_name = 'name problem',
-  timeRemain = 'xxxxxx',
+  due_date = 'xxxxxx',
 }: ProblemTimerProps) {
 
   return (
@@ -24,7 +23,7 @@ export default function ProblemCard({
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 mr-4">
-            <span className="text-lg">time remain : {timeRemain}</span>
+            <span className="text-lg">Due Date : {due_date}</span>
           </div>
         </div>
       </CardContent>
