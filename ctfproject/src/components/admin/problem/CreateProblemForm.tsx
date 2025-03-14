@@ -29,7 +29,7 @@ const CreateProblemForm = () => {
     setIsCreating(true);
 
     const formData = new FormData();
-    formData.append('pro_name', problemName as string);
+    formData.append("pro_name", (problemName || '').toLowerCase().replace(/\s+/g, '_'));
     formData.append('pro_description', problemDescription);
 
     try {
@@ -66,7 +66,7 @@ const CreateProblemForm = () => {
         <CardContent>
           <div className="grid gap-4 py-2">
             {message && (
-              <Alert className="mb-4 bg-red-50 text-red-800 border-red-200">
+              <Alert className="max-w-lg mb-4 bg-red-50 text-red-800 border-red-200">
                 <AlertDescription>{message}</AlertDescription>
               </Alert>
             )}
