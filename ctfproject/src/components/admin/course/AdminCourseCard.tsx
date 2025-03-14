@@ -22,7 +22,7 @@ const AdminCourseCard = ({ courseId }: { courseId: string }) => {
           <div className="w-18 h-18 bg-gray-200 rounded-xl"></div>
           <div className="flex-1">
             <div className="flex items-center space-x-2">
-              <Badge variant="secondary" className="bg-[#777676] text-white">
+              <Badge variant="secondary">
                 CyberSecurity
               </Badge>
             </div>

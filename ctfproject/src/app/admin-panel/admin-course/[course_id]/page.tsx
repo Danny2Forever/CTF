@@ -2,14 +2,13 @@
 
 import React, { Suspense } from 'react'
 import { useParams } from 'next/navigation'
-import { Shield, Book, PlusCircle } from 'lucide-react'
+import { Shield, PlusCircle } from 'lucide-react'
 
 import AdminSidebar from '@/components/admin/sidebar/AdminSidebar'
 import AdminCourseDetail from '@/components/admin/course/AdminCourseDetail'
 import CourseAllProblem from '@/components/admin/problem/CourseAllProblem'
 import AdminAddProblemButton from '@/components/admin/buttons/AdminAddProblem'
 
-// Loading component for suspense
 const PageSkeleton = () => (
   <div className="max-w-7xl mx-auto mt-8 animate-pulse">
     <div className="h-10 bg-gray-200 rounded w-1/2 mx-auto mb-8"></div>
@@ -27,7 +26,6 @@ const PageSkeleton = () => (
 )
 
 const AdminCoursePage = () => {
-  // Safely extract course_id with type checking
   const params = useParams<{ course_id: string }>();
   const course_id = params.course_id;
 
@@ -46,7 +44,6 @@ const AdminCoursePage = () => {
   return (
     <div className="max-w-7xl mx-auto mt-8 px-4">
       <div className="flex items-center justify-center mb-8">
-        <Book className="h-8 w-8 text-primary mr-3" />
         <h1 className="text-3xl font-bold text-primary">Admin Course Management</h1>
       </div>
 

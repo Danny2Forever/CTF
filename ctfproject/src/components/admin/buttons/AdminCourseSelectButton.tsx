@@ -18,7 +18,7 @@ const AdminCourseSelectButton = ({ courseId }: { courseId: string }) => {
             className='cursor-pointer'
             onClick={handleSelect}
         >
-            select Course
+            Select Course
         </Button>
     )
 }
