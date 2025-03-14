@@ -58,7 +58,7 @@ const Page = () => {
   const teamMembers = [
     {
       name: "นายกวินท์ อิสรามาลา ",
-      role: "Frontend",
+      role: "Frontend Developer",
       studentId: "66070009",
       githubUrl: "https://github.com/KwnxpN",
       email: "66070009@gmail.com",
@@ -74,7 +74,7 @@ const Page = () => {
     },
     {
       name: "นายธีรภัทร ทวนพรมราช",
-      role: "Frontend",
+      role: "Frontend Developer",
       studentId: "66070093",
       githubUrl: "https://github.com/Danny2Forever",
       email: "66070093@gmail.com",
@@ -83,7 +83,7 @@ const Page = () => {
     {
       name: "นางสาวศิริกุล คำมุง",
       studentId: "66070192",
-      role: "UX/UI",
+      role: "UX/UI Designer",
       githubUrl: "https://github.com/Imparaloy",
       email: "66070192@gmail.com",
       imageUrl: "paloy.jpg",
@@ -91,7 +91,7 @@ const Page = () => {
     {
       name: "นายอรุชา เขมทโรนนท์",
       studentId: "66070220",
-      role: "Backend",
+      role: "Backend Developer",
       githubUrl: "https://github.com/Annerez",
       email: "66070220@gmail.com",
       imageUrl: "ice.jpg",
@@ -99,7 +99,7 @@ const Page = () => {
     {
       name: "นายภัทรพล เยาวราช",
       studentId: "66070148",
-      role: "Backend",
+      role: "Backend Developer",
       githubUrl: "https://github.com/Pyaowara",
       email: "66070148@gmail.com",
       imageUrl: "in.jpg",
