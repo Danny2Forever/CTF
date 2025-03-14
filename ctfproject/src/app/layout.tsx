@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import AOSProvider from "../components/AOSProvider";
 
 import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -50,6 +51,7 @@ export default function RootLayout({
             },
           }}
         />
+        <Footer />
       </body>
     </html>
   );
