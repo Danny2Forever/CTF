@@ -26,7 +26,7 @@ const ProblemSelector = ({ onSelectProblem }: ProblemSelectorProps) => {
   const [problems, setProblems] = useState<Problem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+  const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
   useEffect(() => {
     const fetchProblems = async () => {

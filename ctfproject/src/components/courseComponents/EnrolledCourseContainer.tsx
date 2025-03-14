@@ -11,7 +11,7 @@ export default function EnrolledCourseContainer({}) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN;
+      const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
       const response = await fetch(
         "http://141.11.158.213:3000/api/courses/enrolled",
         {

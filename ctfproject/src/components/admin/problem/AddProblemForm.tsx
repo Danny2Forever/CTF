@@ -32,7 +32,7 @@ const AddProblemForm = ({ courseId }: { courseId: string}) => {
     const [formError, setFormError] = useState<string | null>(null);
     const [formSuccess, setFormSuccess] = useState<string | null>(null);
     const router = useRouter()
-    const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+    const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
     const handleProblemSelect = (id: number) => {
         setSelectedProblemId(id);

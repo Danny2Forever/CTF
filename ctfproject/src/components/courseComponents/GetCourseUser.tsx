@@ -3,7 +3,7 @@ import { AllProblems } from "../../../types/problem";
 
 export function fetchCourseData(course_id: number | undefined): AllProblems {
   const [allProblems, setAllProblems] = useState<AllProblems>();
-  const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN;
+  const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
   useEffect(() => {
     async function fetchData() {
       try {

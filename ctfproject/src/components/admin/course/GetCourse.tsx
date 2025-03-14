@@ -12,7 +12,7 @@ export function getCourse(courseId: string) {
     useEffect(() => {
         async function fetchCourse() {
             try {
-                const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+                const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
                 const courseResponse = await fetch(`http://141.11.158.213:3000/api/courses/${courseId}`, {
                     method: 'GET',

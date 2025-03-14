@@ -10,7 +10,7 @@ export function GetCourseProblem(courseId: string)  {
     useEffect(() => {
         async function fetchCourseProblems() {
             try {
-                const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+                const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
                 const allProblemResponse = await fetch(`http://141.11.158.213:3000/api/problems/course/${courseId}`, {
                     method: 'GET',

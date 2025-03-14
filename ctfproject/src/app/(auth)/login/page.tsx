@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FormEvent, useState, ReactElement } from "react";
+import React, { FormEvent, useState, useEffect } from "react";
 import { Eye, EyeOff, Loader2, Flag } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,6 @@ export interface LoginData {
 
 export const VALIDATION_MESSAGES = {
   PASSWORD_MISMATCH: "รหัสผ่านและการsยืนยันรหัสผ่านไม่ตรงกัน",
-  PASSWORD_LENGTH: "รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร",
   TERMS_REQUIRED: "กรุณายอมรับข้อกำหนดการใช้บริการและความเป็นส่วนตัว",
   INVALID_PHONE: "กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง (เช่น 0812345678)",
   GENERIC_ERROR: "เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองใหม่อีกครั้ง",
@@ -23,6 +22,13 @@ const Signin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      router.push('/mycourse');
+    }
+  }, [router]);
 
   const submitLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,10 +42,6 @@ const Signin = () => {
         username: formData.get("username") as string,
         password: formData.get("password") as string,
       };
-
-      if (userData.password.length < 1) {
-        throw new Error("รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร");
-      }
 
       const response = await fetch(
         "http://141.11.158.213:3000/api/auth/login",
@@ -58,19 +60,17 @@ const Signin = () => {
         throw new Error(data.message || "เข้าสู่ระบบไม่สำเร็จ");
       }
 
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+      } else {
+        console.warn('No token received from the server');
+      }
+
       toast.success("เข้าสู่ระบบสำเร็จ", {
         duration: 3000,
         position: "bottom-right",
       });
-      if (data.role == "admin") {
-        router.push("/admin/main");
-      } else {
-        if (data.room == undefined) {
-          router.push("/user/queue");
-        } else {
-          router.push("/user/main");
-        }
-      }
+      router.push("/mycourse");
     } catch (error) {
       const errorMessage =
         error instanceof Error &&

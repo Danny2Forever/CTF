@@ -21,11 +21,12 @@ const CourseCard = ({ course }: { course: Course }) => {
     try {
       setIsEnrolling(true);
       setEnrollmentStatus("idle");
+      const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
       const response = await fetch(`http://141.11.158.213:3000/api/courses/${course.course_id}/enroll`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_TOKEN}`,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
@@ -116,4 +117,4 @@ const CourseCard = ({ course }: { course: Course }) => {
   );
 };
 
-export default CourseCard;  
+export default CourseCard;
