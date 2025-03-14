@@ -38,3 +38,15 @@ export type AddProblemResponse = {
     message: string;
     pro_cour_id: number | undefined
 }
+
+export type CourseProblem = {
+    pro_id: number;
+    pro_name: string;
+    pro_description: string;
+    created_by: number;
+    created_date: string;
+    pro_cour_id: number;
+    expiration_date: string;
+}
+
+export type AllCourseProblem = CourseProblem[]

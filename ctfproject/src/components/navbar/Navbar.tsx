@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full flex justify-center px-4 py-3 absolute top-4 z-50">
+    <div className="w-full flex justify-center px-4 py-3 top-4 z-50">
       <nav className="bg-white/90 backdrop-blur-sm rounded-xl shadow-md px-6 py-3 w-full max-w-6xl flex items-center justify-between relative">
         <div className="flex items-center gap-2">
           <Flag className="h-6 w-6 text-blue-500" />
@@ -18,10 +18,10 @@ const Navbar = () => {
           <Link href="/" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">
             Home
           </Link>
-          <Link href="/" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">
+          <Link href="/mycourse" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">
             My Course
           </Link>
-          <Link href="/" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">
+          <Link href="/admin-panel" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">
             Admin Panel
           </Link>
           <Link href="/" className="px-4 py-1 rounded-full text-gray-700 hover:text-blue-600">

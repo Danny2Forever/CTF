@@ -3,11 +3,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import QuizProblem from "@/components/quizComponents/QuizProblem";
 import QuizRequire from "@/components/quizComponents/QuizRequire";
 import { Button } from "@/components/ui/button";
-import AnswerPopUp from "@/components/quizComponents/AnswerPopUp";
 import { useParams } from "next/navigation";
 import { useProblemData } from "@/components/quizComponents/GetProblem";
 import { useCreateContainer } from "@/components/quizComponents/GetContainer";
 import { useContainerUp } from "@/components/quizComponents/GetComposeUp"; // Make sure path is correct
+import AnswerBox from "@/components/quizComponents/AnswerBox";
 
 type QuizParams = {
   quiz_id: string;
@@ -207,7 +207,7 @@ export default function QuizPage() {
 
   return (
     <>
-      <div className="min-h-screen p-6 flex justify-center items-center">
+      <div className="min-h-screen p-6 flex justify-center items-center -mt-16">
         <div className="w-full max-w-7xl flex flex-col lg:flex-row space-y-8 lg:space-y-0 justify-center gap-14">
           <div className="h-[78vh] w-full pb-3">
             {loading ? (

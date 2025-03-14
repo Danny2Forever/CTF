@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getCourse } from './GetCourse';
@@ -17,7 +16,7 @@ const AdminCourseCard = ({ courseId }: { courseId: string }) => {
   }
 
   return (
-    <Card key={courseId} className="bg-white mb-4">
+    <Card key={courseId} data-aos="fade-left" className="bg-white mb-4">
       <CardContent>
         <div className="flex items-start space-x-4">
           <div className="w-18 h-18 bg-gray-200 rounded-xl"></div>
@@ -31,11 +30,7 @@ const AdminCourseCard = ({ courseId }: { courseId: string }) => {
             <p className="text-sm text-gray-600">{user?.first_name} {user?.last_name}</p>
           </div>
           <div className="flex space-x-2">
-            <Button variant="outline" size="sm" className='cursor-pointer'>delete course</Button>
-            {/* This div make button not shifting when it on loading */}
-            <div className='h-10 w-25'>
-              <AdminCourseSelectButton courseId={courseId} />
-            </div>
+            <AdminCourseSelectButton courseId={courseId} />
           </div>
         </div>
       </CardContent>
