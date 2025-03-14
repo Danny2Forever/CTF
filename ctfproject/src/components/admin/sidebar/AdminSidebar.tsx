@@ -14,7 +14,7 @@ const AdminSidebar = () => {
                     <a
                         key={item.path}
                         href={item.path}
-                        className="block cursor-pointer hover:bg-gray-200 p-2 rounded-md transition-colors"
+                        className="block cursor-pointer hover:bg-primary/80 hover:text-white p-2 rounded-md transition-colors"
                     >
                         {item.label}
                     </a>
