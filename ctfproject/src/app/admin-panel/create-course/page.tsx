@@ -14,7 +14,7 @@ const CreateCoursePage = () => {
                 <AdminSidebar />
 
                 {/* Main Content Area */}
-                <div className="w-full bg-gray-200 p-6 rounded-4xl">
+                <div className="md:w-3/4 bg-gray-200 p-6 rounded-4xl">
                     <CreateCourseForm />
                 </div>
             </div>
