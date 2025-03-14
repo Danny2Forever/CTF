@@ -99,7 +99,8 @@ const CreateProblemForm = () => {
           <Button
             type="submit"
             disabled={isCreating}
-            className="bg-[#D9D9D9] text-black cursor-pointer hover:bg-black hover:text-white transition-all"
+            variant="default"
+            className="cursor-pointer hover:scale-105 transition duration-300 mt-4"
           >
             {isCreating ? "Creating..." : "Create Problem"}
           </Button>
