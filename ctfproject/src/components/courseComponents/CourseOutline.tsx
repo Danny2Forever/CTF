@@ -19,7 +19,7 @@ const CourseOutline: React.FC<CourseOutlineProps> = ({ course_id, problem }) => 
     <div>
       <div className="mt-4 bg-white p-4 rounded-3xl shadow flex justify-between items-center">
         <p className="text-gray-600">Problem Name: {problem.pro_name}</p>
-        <Button onClick={handleNavigate} variant="secondary" className="bg-[#D9D9D9] cursor-pointer">
+        <Button onClick={handleNavigate} variant="default" className=" cursor-pointer">
           Get Problem
         </Button>
       </div>

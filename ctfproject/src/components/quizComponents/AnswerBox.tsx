@@ -26,7 +26,7 @@ const AnswerBox: React.FC<{ onSend: (answer: string) => void }> = ({ onSend }) =
   };
 
   return (
-    <div className="w-full p-3 mt-4 bg-gray-500 text-white rounded-lg">
+    <div className="w-1/2 mx-auto p-3 mt-4 bg-gray-500 text-white rounded-lg">
       <input
         type="text"
         value={answer}
