@@ -38,7 +38,7 @@ const Register = () => {
     try {
       const form = e.currentTarget;
       const formData = new FormData(form);
-      
+
       const userData: RegisterFormData = {
         username: formData.get('username') as string,
         email: formData.get('email') as string, 
@@ -62,7 +62,7 @@ const Register = () => {
         throw new Error('กรุณายอมรับข้อกำหนดการใช้บริการและความเป็นส่วนตัว');
       }
 
-      const response = await fetch('http://localhost:3000/auth/register', {
+      const response = await fetch('http://141.11.158.213:3000/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

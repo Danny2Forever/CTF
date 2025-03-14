@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from "sonner"
 
 export interface LoginData {
-    userIdentifier: string;
+    username: string;
     password: string;
 }
 
@@ -33,7 +33,7 @@ const Signin = () => {
         const formData = new FormData(form);
         
         const userData: LoginData = {
-          userIdentifier: formData.get('userIdentifier') as string,
+          username: formData.get('userIdentifier') as string,
           password: formData.get('password') as string,
         };
   
@@ -41,7 +41,7 @@ const Signin = () => {
           throw new Error('รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร');
         }
   
-        const response = await fetch('http://localhost:3000/auth/login', {
+        const response = await fetch('http://141.11.158.213:3000/api/auth/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -54,7 +54,6 @@ const Signin = () => {
         if (!response.ok) {
           throw new Error(data.message || 'เข้าสู่ระบบไม่สำเร็จ');
         }
-
         toast.success("เข้าสู่ระบบสำเร็จ", {
           duration: 3000,
           position: 'bottom-right',
