@@ -61,7 +61,7 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({
       // First upload the file
       try {
         const formData = new FormData();
-        formData.append("problemName", pro_name);
+        formData.append("problemName", pro_name.toLowerCase().replace(/\s+/g, '_'));
         formData.append("problemID", pro_id);
         if (uploadedFile) {
           formData.append("file", uploadedFile);

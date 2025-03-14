@@ -18,7 +18,7 @@ export default function ProblemCard({
     <Card className="w-full rounded-full shadow-md mb-4">
       <CardContent className="p-2 flex items-center justify-between">
         <div className="flex-1">
-            <span className="text-lg font-medium pl-2">{problem_name}</span>
+            <span className="text-lg font-medium pl-2">{problem_name.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</span>
         </div>
 
         <div className="flex items-center gap-4">

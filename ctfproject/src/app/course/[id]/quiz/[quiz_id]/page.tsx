@@ -42,6 +42,7 @@ export default function QuizPage() {
     problemID: 0,
   });
   const [shouldStartContainer, setShouldStartContainer] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   // Get URL parameters
   const params = useParams<QuizParams>();
@@ -86,6 +87,7 @@ export default function QuizPage() {
     loading: containerLoading,
     error: containerError,
   } = useCreateContainer(containerInfo);
+  
 
   // Function to manually trigger container startup
   const startContainer = useCallback(() => {
@@ -196,14 +198,6 @@ export default function QuizPage() {
     sshpass: sshpass,
   };
 
-  const handleButtonClick = () => {
-    // Only show the answer popup
-    setIsPopupVisible(true);
-  };
-
-  const handleClosePopup = () => {
-    setIsPopupVisible(false);
-  };
 
   return (
     <>
@@ -239,23 +233,32 @@ export default function QuizPage() {
                 {containerLoading
                   ? "Setting up environment..."
                   : containerUpLoading
-                  ? "Starting container..."
-                  : "Start Container"}
+                    ? "Starting container..."
+                    : "Start Container"}
               </Button>
 
-              {/* Answer button - only enabled when container is up */}
-              <Button
-                onClick={handleButtonClick}
-                className="w-96 h-11 rounded-4xl"
-                disabled={
-                  !problem ||
-                  containerLoading ||
-                  containerUpLoading ||
-                  !containerUpSuccess
-                }
-              >
-                Answer
-              </Button>
+              {/* Answer box */}
+              <AnswerBox
+                onSend={(answer) => {
+                  if (answer === flag) {
+
+                    setShowSuccessMessage(true);
+                  } else {
+                    setShowSuccessMessage(false);
+                  }
+                }}
+
+              />
+              {showSuccessMessage && (
+                <div
+                  className="w-md p-4 bg-green-100 border border-green-400 text-green-700 relative rounded-2xl"
+                  role="alert"
+                >
+                  <span className="block sm:inline">
+                    Your submission was successful!
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Container Status Display */}
@@ -324,7 +327,7 @@ export default function QuizPage() {
         </div>
       </div>
 
-      <AnswerBox onSend={(answer) => console.log("Send :", answer)} />
+
     </>
   );
 }

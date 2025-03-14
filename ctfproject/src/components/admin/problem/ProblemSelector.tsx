@@ -87,7 +87,7 @@ const ProblemSelector = ({ onSelectProblem }: ProblemSelectorProps) => {
             
             {problems.map((problem) => (
               <SelectItem key={problem.pro_id} value={problem.pro_id.toString()}>
-                {problem.pro_name}
+                {problem.pro_name.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}
               </SelectItem>
             ))}
           </SelectContent>
