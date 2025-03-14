@@ -8,8 +8,6 @@ import { ChevronRight, Flag, Trophy, Users, Clock, Shield, Terminal, Brain, Code
 import { TeamMember } from "@/components/landing/team";
 import { useRouter } from "next/navigation";
 
-import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/Footer";
 
 const Page = () => {
   const [activeChallenge, setActiveChallenge] = useState(0);
@@ -422,9 +420,6 @@ const Page = () => {
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        <Footer />
       </div>
     );
 };
