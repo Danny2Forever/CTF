@@ -10,6 +10,7 @@ import AdminSidebar from '@/components/admin/sidebar/AdminSidebar';
 import AdminAllCourse from '@/components/admin/course/AdminAllCourse';
 
 
+
 const AdminPanelPage = () => {
     const router = useRouter();
     return (

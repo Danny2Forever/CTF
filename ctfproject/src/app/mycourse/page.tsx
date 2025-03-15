@@ -3,7 +3,7 @@ import MyCourse from "@/components/courseComponents/MyCourse";
 
 const Page = () => {
   return (
-    <MyCourse />
+      <MyCourse />
   );
 };
 
