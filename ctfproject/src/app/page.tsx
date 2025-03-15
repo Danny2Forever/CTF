@@ -55,7 +55,7 @@ const Page = () => {
 
   const teamMembers = [
     {
-      name: "นายกวินท์ อิสรามาลา ",
+      name: "นายกวินท์ อิสสรามาลา ",
       role: "Frontend Developer",
       studentId: "66070009",
       githubUrl: "https://github.com/KwnxpN",
