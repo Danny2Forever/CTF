@@ -37,7 +37,6 @@ interface QuizRequireProps {
 export default function QuizPage() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [problem, setProblem] = useState<CurrentProblem | undefined>(undefined);
   const [containerInfo, setContainerInfo] = useState<Container>({
     username: "",
@@ -67,7 +66,7 @@ export default function QuizPage() {
 
   // Parse course_id to number if it exists
   const courseIdNumber = course_id ? parseInt(course_id) : undefined;
-  const quizIdNumber = quiz_id ? parseInt(quiz_id) : undefined;
+  // const quizIdNumber = quiz_id ? parseInt(quiz_id) : undefined;
 
   // Use the custom hook to fetch problems
   const { problems, loading, error } = useProblemData(courseIdNumber);
