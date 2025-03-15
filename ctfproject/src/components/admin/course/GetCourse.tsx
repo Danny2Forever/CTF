@@ -5,7 +5,6 @@ import { User } from '../../../../types/user'
 
 export function getCourse(courseId: string) {
     const [course, setCourse] = useState<Course>()
-    const [user, setUser] = useState<User>()
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<Error | null>(null)
 
@@ -29,25 +28,6 @@ export function getCourse(courseId: string) {
 
                 const courseData: Course = await courseResponse.json()
                 setCourse(courseData)
-                
-                // Only proceed with user fetch if we have a valid created_by ID
-                if (courseData?.created_by) {
-                    const userResponse = await fetch(`https://cyberctfproject.duckdns.org/api/users/getUser/${courseData.created_by}`, {
-                        method: 'GET',
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        credentials: "include",
-                    });
-
-                    if (!userResponse.ok) {
-                        throw new Error('Failed to fetch user')
-                    }
-
-                    const userData: User = await userResponse.json()
-                    setUser(userData)
-                }
-                
                 setIsLoading(false)
             } catch (err) {
                 setError(err instanceof Error ? err : new Error('An unknown error occurred'))
@@ -58,5 +38,5 @@ export function getCourse(courseId: string) {
         
         fetchCourse()
     }, [courseId])
-    return { course, user, isLoading, error }
+    return { course, isLoading, error }
 }

@@ -28,7 +28,7 @@ export default function Course() {
   const [currentView, setCurrentView] = useState<CourseViewType>(CourseViewType.Outline);
   
   // Fetch course data
-  const { course, user, isLoading, error } = getCourse(id);
+  const { course, isLoading, error } = getCourse(id);
   
   // Render loading state
   if (isLoading) {
