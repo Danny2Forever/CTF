@@ -8,11 +8,11 @@ export function fetchCourseData(course_id: number | undefined): AllProblems {
     async function fetchData() {
       try {
         const response = await fetch(
-          `http://141.11.158.213:3000/api/problems/course/${course_id}`,
+          `https://141.11.158.213/api/problems/course/${course_id}`,
           {
             method: "GET",
+            credentials: 'include',
             headers: {
-              Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
           }

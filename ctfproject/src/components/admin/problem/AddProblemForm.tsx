@@ -67,12 +67,12 @@ const AddProblemForm = ({ courseId }: { courseId: string}) => {
             console.log("Send data", JSON.stringify(AddProblemData) +" To course ID "+ courseId)
 
             // Send POST request to your endpoint
-              const response = await fetch(`http://141.11.158.213:3000/api/problems/course/${courseId}`, {
+              const response = await fetch(`https://141.11.158.213/api/problems/course/${courseId}`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify(AddProblemData),
               });
 

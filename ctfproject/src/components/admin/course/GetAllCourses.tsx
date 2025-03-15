@@ -16,7 +16,7 @@ export function getAllCourses() {
     async function fetchCourses() {
       try {
         const response = await fetch(
-          "http://141.11.158.213:3000/api/courses/all",
+          "https://141.11.158.213/api/courses/all",
           {
             method: "GET",
             headers: {
@@ -33,7 +33,7 @@ export function getAllCourses() {
         const data: AllCourses = await response.json();
         for (let i = 0; i < data.length; i++) {
           const permission = await fetch(
-            `http://141.11.158.213:3000/api/roles/my-permissions/${data[i].course_id}`,
+            `https://141.11.158.213/api/roles/my-permissions/${data[i].course_id}`,
           {
             method: "GET",
             headers: {

@@ -62,7 +62,7 @@ const Register = () => {
         throw new Error('กรุณายอมรับข้อกำหนดการใช้บริการและความเป็นส่วนตัว');
       }
 
-      const response = await fetch('http://141.11.158.213:3000/api/auth/register', {
+      const response = await fetch('https://141.11.158.213/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

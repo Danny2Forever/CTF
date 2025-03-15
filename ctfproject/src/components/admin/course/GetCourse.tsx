@@ -14,7 +14,7 @@ export function getCourse(courseId: string) {
             try {
                 const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
-                const courseResponse = await fetch(`http://141.11.158.213:3000/api/courses/${courseId}`,
+                const courseResponse = await fetch(`https://141.11.158.213/api/courses/${courseId}`,
                     {
                     method: 'GET',
                     headers: {
@@ -32,7 +32,7 @@ export function getCourse(courseId: string) {
                 
                 // Only proceed with user fetch if we have a valid created_by ID
                 if (courseData?.created_by) {
-                    const userResponse = await fetch(`http://141.11.158.213:3000/api/users/getUser/${courseData.created_by}`, {
+                    const userResponse = await fetch(`https://141.11.158.213/api/users/getUser/${courseData.created_by}`, {
                         method: 'GET',
                         headers: {
                             "Content-Type": "application/json",

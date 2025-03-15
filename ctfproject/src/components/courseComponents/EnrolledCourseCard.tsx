@@ -29,10 +29,10 @@ const EnrolledCourseCard = ({ course }: { course: Course }) => {
             setUnenrollStatus("idle");
             const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
             
-            const response = await fetch(`http://141.11.158.213:3000/api/courses/${course.course_id}/unenroll`, {
+            const response = await fetch(`https://141.11.158.213/api/courses/${course.course_id}/unenroll`, {
                 method: 'DELETE',
+                credentials: 'include',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                 }
             });
 

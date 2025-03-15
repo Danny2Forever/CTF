@@ -69,7 +69,7 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({
 
         // Don't stringify FormData - send it directly
         const uploadRes = await fetch(
-          "http://141.11.158.213:3000/api/docker/upload-image",
+          "https://141.11.158.213/api/docker/upload-image",
           {
             method: "POST",
             body: formData,
@@ -125,7 +125,7 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({
       setProcessingStatus("Building image... This may take a few minutes.");
 
       const res = await fetch(
-        "http://141.11.158.213:3000/api/docker/build-image",
+        "https://141.11.158.213/api/docker/build-image",
         {
           method: "POST",
           body: JSON.stringify({ problemID: pro_id, problemName: pro_name }),

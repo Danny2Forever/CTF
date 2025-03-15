@@ -12,12 +12,12 @@ export function GetCourseProblem(courseId: string)  {
             try {
                 const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
-                const allProblemResponse = await fetch(`http://141.11.158.213:3000/api/problems/course/${courseId}`, {
+                const allProblemResponse = await fetch(`https://141.11.158.213/api/problems/course/${courseId}`, {
                     method: 'GET',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    credentials: 'include',
                 })
 
                 if (!allProblemResponse.ok) {

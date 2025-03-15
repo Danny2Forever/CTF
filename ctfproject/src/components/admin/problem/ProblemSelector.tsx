@@ -32,8 +32,9 @@ const ProblemSelector = ({ onSelectProblem }: ProblemSelectorProps) => {
     const fetchProblems = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('http://141.11.158.213:3000/api/problems', {
+        const response = await fetch('https://141.11.158.213/api/problems', {
             method: "GET",
+            credentials: 'include',
             headers: {
               'Authorization': `Bearer ${token}`
             }});

@@ -123,7 +123,7 @@ export default function QuizPage() {
 
         // Call API to terminate the container
         const response = await fetch(
-          "http://141.11.158.213:3000/api/docker/compose-down",
+          "https://141.11.158.213/api/docker/compose-down",
           {
             method: "POST",
             headers: {
@@ -207,7 +207,7 @@ export default function QuizPage() {
         try {
           // Call API to terminate the container
           const response = await fetch(
-            "http://141.11.158.213:3000/api/docker/compose-down",
+            "https://141.11.158.213/api/docker/compose-down",
             {
               method: "POST",
               headers: {

@@ -13,11 +13,11 @@ export default function EnrolledCourseContainer({}) {
     const fetchData = async () => {
       const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
       const response = await fetch(
-        "http://141.11.158.213:3000/api/courses/enrolled",
+        "https://141.11.158.213/api/courses/enrolled",
         {
           method: "GET",
+          credentials: 'include',
           headers: {
-            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
