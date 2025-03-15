@@ -14,12 +14,13 @@ export function getCourse(courseId: string) {
             try {
                 const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
-                const courseResponse = await fetch(`http://141.11.158.213:3000/api/courses/${courseId}`, {
+                const courseResponse = await fetch(`http://141.11.158.213:3000/api/courses/${courseId}`,
+                    {
                     method: 'GET',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
                 });
 
                 if (!courseResponse.ok) {
@@ -34,9 +35,9 @@ export function getCourse(courseId: string) {
                     const userResponse = await fetch(`http://141.11.158.213:3000/api/users/getUser/${courseData.created_by}`, {
                         method: 'GET',
                         headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        }
+                            "Content-Type": "application/json",
+                        },
+                        credentials: "include",
                     });
 
                     if (!userResponse.ok) {

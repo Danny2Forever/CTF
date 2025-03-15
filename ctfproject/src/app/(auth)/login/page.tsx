@@ -61,7 +61,7 @@ const Signin = () => {
       }
 
       if (data.token) {
-        localStorage.setItem('token', data.token);
+        document.cookie = `token=${data.token}; path=/; max-age=${60 * 60 * 24 * 7}`; // 7 days expiration
       } else {
         console.warn('No token received from the server');
       }

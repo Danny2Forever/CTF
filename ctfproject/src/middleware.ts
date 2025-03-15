@@ -20,10 +20,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
   
-  if (isPublicPath && isAuthenticated) {
-    // Redirect to dashboard if already logged in and trying to access public paths
-    return NextResponse.redirect(new URL('/mycourse', request.url));
-  }
+//   if (isPublicPath && isAuthenticated) {
+//     // Redirect to dashboard if already logged in and trying to access public paths
+//     return NextResponse.redirect(new URL('/mycourse', request.url));
+//   }
   
   // Admin panel access checks
   if (path.startsWith('/admin-panel') && isAuthenticated && user) {
