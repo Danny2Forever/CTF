@@ -8,6 +8,7 @@ import { useProblemData } from "@/components/quizComponents/GetProblem";
 import { useCreateContainer } from "@/components/quizComponents/GetContainer";
 import { useContainerUp } from "@/components/quizComponents/GetComposeUp";
 import AnswerBox from "@/components/quizComponents/AnswerBox";
+import { fetchCurrentUser } from "@/lib/utils";
 
 type QuizParams = {
   quiz_id: string;
@@ -35,13 +36,26 @@ interface QuizRequireProps {
 
 export default function QuizPage() {
   const router = useRouter();
+  const [user, setUser] = useState<any>(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [problem, setProblem] = useState<CurrentProblem | undefined>(undefined);
   const [containerInfo, setContainerInfo] = useState<Container>({
-    username: "66070009", // Updated to use consistent username
+    username: "",
     problemName: "",
     problemID: 0,
   });
+
+  useEffect(() => {
+    const getUser = async () => {
+      const userData = await fetchCurrentUser();
+      setUser(userData);
+      setContainerInfo(prev => ({
+        ...prev,
+        username: userData?.username || ""
+      }));
+    };
+    getUser();
+  }, []);
   const [shouldStartContainer, setShouldStartContainer] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [isStoppingContainer, setIsStoppingContainer] = useState(false);
@@ -70,7 +84,7 @@ export default function QuizPage() {
 
         // Update container info when problem changes
         setContainerInfo({
-          username: "66070009",
+          username: user.username,
           problemName: currentProblem.pro_name,
           problemID: currentProblem.pro_id,
         });
