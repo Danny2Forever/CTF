@@ -3,6 +3,7 @@
 import { CreateProblemData } from "../../types/problem";
 import { CreateCourseData, CreateCourseResponse } from "../../types/course";
 import { z } from "zod";
+import { getToken } from "@/utils/auth";
 
 const courseSchema = z.object({
   course_name: z.string().min(1, "Course Name is required"),
@@ -14,7 +15,9 @@ export async function submitCreateCourseForm(formData: FormData) {
 
   try {
     const rawCourseData: CreateCourseData = {
-      course_name: (formData.get("course_name") as string).toLowerCase().replace(/\s+/g, '_'),
+      course_name: (formData.get("course_name") as string)
+        .toLowerCase()
+        .replace(/\s+/g, "_"),
       course_description: formData.get("course_description") as string,
     };
 
@@ -30,44 +33,42 @@ export async function submitCreateCourseForm(formData: FormData) {
       };
     }
 
-    console.log(validateCourseData)
-    console.log("JSON", JSON.stringify(validateCourseData))
-
+    console.log(validateCourseData);
+    console.log("JSON", JSON.stringify(validateCourseData));
 
     // POST here
-    const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+    const token =
+      localStorage.getItem("token") || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
     const response = await fetch("http://141.11.158.213:3000/api/courses", {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         course_name: validateCourseData.data.course_name,
-        course_description: validateCourseData.data.course_description
-      })
+        course_description: validateCourseData.data.course_description,
+      }),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch courses')
+      throw new Error("Failed to fetch courses");
     }
 
-    const data: CreateCourseResponse = await response.json()
+    const data: CreateCourseResponse = await response.json();
     // Simulate creating a course with a random ID
     console.log("Course created with ID:", data.courseId);
 
-
     return {
       message: data.message,
-      courseId: data.courseId
+      courseId: data.courseId,
     };
-
   } catch (e) {
     console.error("Submit Form Error:", e);
     return {
       message: "Submit Form Error, Please try again",
-      courseId: undefined
+      courseId: undefined,
     };
   }
 }
@@ -82,9 +83,9 @@ export async function submitCreateProblemForm(formData: FormData) {
 
   try {
     const rawProblemData: CreateProblemData = {
-      pro_name: formData.get('pro_name') as string,
-      pro_description: formData.get('pro_description') as string
-    }
+      pro_name: formData.get("pro_name") as string,
+      pro_description: formData.get("pro_description") as string,
+    };
 
     console.log("Raw Problem Data", rawProblemData);
 
@@ -94,19 +95,17 @@ export async function submitCreateProblemForm(formData: FormData) {
       console.log("Validation failed:", validateProblemData.error.format());
       return {
         message: "Problem name and description are required",
-        pro_id: undefined
+        pro_id: undefined,
       };
     }
 
     try {
-  
-      const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN
+      const token = getToken();
       const response = await fetch("http://141.11.158.213:3000/api/problems/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           pro_name: validateProblemData.data.pro_name,
@@ -121,7 +120,7 @@ export async function submitCreateProblemForm(formData: FormData) {
         message: "Problem created successfully",
         pro_name: validateProblemData.data.pro_name,
         pro_id: data.pro_id,
-      }
+      };
     } catch (error) {
       console.error("Error creating problem:", error);
       return {

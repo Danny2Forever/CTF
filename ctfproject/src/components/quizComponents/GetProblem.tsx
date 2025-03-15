@@ -6,7 +6,8 @@ export async function fetchProblemData(
   course_id: number | undefined
 ): Promise<AllProblems> {
   try {
-    const token = process.env.NEXT_PUBLIC_ADMIN_TOKEN;
+    const token =
+      localStorage.getItem("token") || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
     if (!course_id) {
       return [];
