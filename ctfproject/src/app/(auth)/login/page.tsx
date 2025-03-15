@@ -23,12 +23,12 @@ const Signin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      router.push('/mycourse');
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     router.push('/mycourse');
+  //   }
+  // }, [router]);
 
   const submitLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
