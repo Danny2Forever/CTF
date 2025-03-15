@@ -35,7 +35,7 @@ async function createContainer(data: Container): Promise<ContainerResponse> {
     });
 
     const response = await fetch(
-      "https://141.11.158.213/api/docker/create-compose",
+      "https://cyberctfproject.duckdns.org/api/docker/create-compose",
       {
         method: "POST",
         headers: {

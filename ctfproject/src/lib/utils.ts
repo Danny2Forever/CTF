@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export async function fetchCurrentUser() {
   try {
-    const response = await fetch("https://141.11.158.213/api/users/me", {
+    const response = await fetch("https://cyberctfproject.duckdns.org/api/users/me", {
       method: "GET",
       credentials: "include",
     });

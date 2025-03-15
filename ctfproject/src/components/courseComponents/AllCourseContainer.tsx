@@ -12,7 +12,7 @@ export default function AllCourseContainer({}) {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
-      const response = await fetch("https://141.11.158.213/api/courses/all", {
+      const response = await fetch("https://cyberctfproject.duckdns.org/api/courses/all", {
         method: "GET",
         credentials: 'include',
         headers: {

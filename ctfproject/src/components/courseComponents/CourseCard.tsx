@@ -23,7 +23,7 @@ const CourseCard = ({ course }: { course: Course }) => {
       setEnrollmentStatus("idle");
       const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
-      const response = await fetch(`https://141.11.158.213/api/courses/${course.course_id}/enroll`, {
+      const response = await fetch(`https://cyberctfproject.duckdns.org/api/courses/${course.course_id}/enroll`, {
         method: 'POST',
         credentials: 'include',
         headers: {

@@ -44,7 +44,7 @@ const Signin = () => {
       };
 
       const response = await fetch(
-        "https://141.11.158.213/api/auth/login",
+        "https://cyberctfproject.duckdns.org/api/auth/login",
         {
           method: "POST",
           headers: {

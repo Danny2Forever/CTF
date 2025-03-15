@@ -32,7 +32,7 @@ const ProblemSelector = ({ onSelectProblem }: ProblemSelectorProps) => {
     const fetchProblems = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('https://141.11.158.213/api/problems', {
+        const response = await fetch('https://cyberctfproject.duckdns.org/api/problems', {
             method: "GET",
             credentials: 'include',
             headers: {
