@@ -34,13 +34,13 @@ export function getAllCourses() {
         for (let i = 0; i < data.length; i++) {
           const permission = await fetch(
             `http://141.11.158.213:3000/api/roles/my-permissions/${data[i].course_id}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-            }
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
           );
           const permissionData: Permissions = await permission.json();
           if (
