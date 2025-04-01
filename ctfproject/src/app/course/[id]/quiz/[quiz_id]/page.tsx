@@ -248,7 +248,7 @@ export default function QuizPage() {
 
   // Set up quiz props
   const quizprop: QuizRequireProps = {
-    host: "141.11.158.213",
+    host: "141.11.158.216",
     port: port,
     sshuser: sshuser,
     sshpass: sshpass,

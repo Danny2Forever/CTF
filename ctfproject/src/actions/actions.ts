@@ -40,7 +40,7 @@ export async function submitCreateCourseForm(formData: FormData) {
     const token =
       localStorage.getItem("token") || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
-    const response = await fetch("http://141.11.158.213:3000/api/courses", {
+    const response = await fetch("https://cyberctfproject.duckdns.org/api/courses", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -101,7 +101,7 @@ export async function submitCreateProblemForm(formData: FormData) {
 
     try {
       const token = getToken();
-      const response = await fetch("http://141.11.158.213:3000/api/problems/", {
+      const response = await fetch("https://cyberctfproject.duckdns.org/api/problems/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
