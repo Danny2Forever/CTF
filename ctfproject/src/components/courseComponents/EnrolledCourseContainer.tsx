@@ -13,7 +13,7 @@ export default function EnrolledCourseContainer({}) {
     const fetchData = async () => {
       const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
       const response = await fetch(
-        "https://cyberctfproject.duckdns.org/api/courses/enrolled",
+        "https://cyberctfproject.fewpz.xyz/api/courses/enrolled",
         {
           method: "GET",
           credentials: 'include',

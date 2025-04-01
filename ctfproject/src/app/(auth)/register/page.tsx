@@ -62,7 +62,7 @@ const Register = () => {
         throw new Error('กรุณายอมรับข้อกำหนดการใช้บริการและความเป็นส่วนตัว');
       }
 
-      const response = await fetch('https://cyberctfproject.duckdns.org/api/auth/register', {
+      const response = await fetch('https://cyberctfproject.fewpz.xyz/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

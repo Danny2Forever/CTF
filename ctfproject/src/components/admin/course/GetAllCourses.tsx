@@ -16,7 +16,7 @@ export function getAllCourses() {
     async function fetchCourses() {
       try {
         const response = await fetch(
-          "https://cyberctfproject.duckdns.org/api/courses/all",
+          "https://cyberctfproject.fewpz.xyz/api/courses/all",
           {
             method: "GET",
             headers: {
@@ -33,7 +33,7 @@ export function getAllCourses() {
         const data: AllCourses = await response.json();
         for (let i = 0; i < data.length; i++) {
           const permission = await fetch(
-            `https://cyberctfproject.duckdns.org/api/roles/my-permissions/${data[i].course_id}`,
+            `https://cyberctfproject.fewpz.xyz/api/roles/my-permissions/${data[i].course_id}`,
           {
             method: "GET",
             headers: {

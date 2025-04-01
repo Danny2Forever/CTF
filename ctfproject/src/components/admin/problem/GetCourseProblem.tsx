@@ -12,7 +12,7 @@ export function GetCourseProblem(courseId: string)  {
             try {
                 const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
-                const allProblemResponse = await fetch(`https://cyberctfproject.duckdns.org/api/problems/course/${courseId}`, {
+                const allProblemResponse = await fetch(`https://cyberctfproject.fewpz.xyz/api/problems/course/${courseId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'

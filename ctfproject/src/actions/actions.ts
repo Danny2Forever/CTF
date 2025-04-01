@@ -1,5 +1,3 @@
-"use server";
-
 import { CreateProblemData } from "../../types/problem";
 import { CreateCourseData, CreateCourseResponse } from "../../types/course";
 import { z } from "zod";
@@ -37,20 +35,24 @@ export async function submitCreateCourseForm(formData: FormData) {
     console.log("JSON", JSON.stringify(validateCourseData));
 
     // POST here
-    const token =
-      localStorage.getItem("token") || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
+    const token = getToken();
 
-    const response = await fetch("https://cyberctfproject.duckdns.org/api/courses", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        course_name: validateCourseData.data.course_name,
-        course_description: validateCourseData.data.course_description,
-      }),
-    });
+    console.log("Token", token); // Log the token
+
+    const response = await fetch(
+      "https://cyberctfproject.fewpz.xyz/api/courses",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          course_name: validateCourseData.data.course_name,
+          course_description: validateCourseData.data.course_description,
+        }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -101,17 +103,21 @@ export async function submitCreateProblemForm(formData: FormData) {
 
     try {
       const token = getToken();
-      const response = await fetch("https://cyberctfproject.duckdns.org/api/problems/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          pro_name: validateProblemData.data.pro_name,
-          pro_description: validateProblemData.data.pro_description,
-        }),
-      });
+      console.log("Token", token); // Log the token 
+      const response = await fetch(
+        "https://cyberctfproject.fewpz.xyz/api/problems/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            pro_name: validateProblemData.data.pro_name,
+            pro_description: validateProblemData.data.pro_description,
+          }),
+        }
+      );
 
       const data = await response.json();
       console.log("Response data:", data);

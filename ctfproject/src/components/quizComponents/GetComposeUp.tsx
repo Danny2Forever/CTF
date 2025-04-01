@@ -31,7 +31,7 @@ async function containerUp(data: Container): Promise<ContainerUpResponse> {
     console.log("Sending container up request:", requestBody);
 
     const response = await fetch(
-      "https://cyberctfproject.duckdns.org/api/docker/compose-up",
+      "https://cyberctfproject.fewpz.xyz/api/docker/compose-up",
       {
         method: "POST",
         headers: {

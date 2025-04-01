@@ -14,7 +14,7 @@ export async function fetchProblemData(
     }
 
     const response = await fetch(
-      `https://cyberctfproject.duckdns.org/api/problems/course/${course_id}`,
+      `https://cyberctfproject.fewpz.xyz/api/problems/course/${course_id}`,
       {
         method: "GET",
         credentials: 'include',

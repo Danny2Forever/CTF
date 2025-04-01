@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useRouter } from "next/navigation";
+import { getToken } from "@/utils/auth";
 
 interface UploadFileCardProps {
   pro_name: string;
@@ -66,13 +67,15 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({
         if (uploadedFile) {
           formData.append("file", uploadedFile);
         }
+        const token = getToken();
 
         // Don't stringify FormData - send it directly
         const uploadRes = await fetch(
-          "https://cyberctfproject.duckdns.org/api/docker/upload-image",
+          "https://cyberctfproject.fewpz.xyz/api/docker/upload-image",
           {
             method: "POST",
             body: formData,
+            credentials: "include",
             // No Content-Type header - browser sets it with boundary for FormData
           }
         );
@@ -125,7 +128,7 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({
       setProcessingStatus("Building image... This may take a few minutes.");
 
       const res = await fetch(
-        "https://cyberctfproject.duckdns.org/api/docker/build-image",
+        "https://cyberctfproject.fewpz.xyz/api/docker/build-image",
         {
           method: "POST",
           body: JSON.stringify({ problemID: pro_id, problemName: pro_name }),

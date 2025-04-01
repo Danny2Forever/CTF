@@ -136,7 +136,7 @@ export default function QuizPage() {
 
         // Call API to terminate the container
         const response = await fetch(
-          "https://cyberctfproject.duckdns.org/api/docker/compose-down",
+          "https://cyberctfproject.fewpz.xyz/api/docker/compose-down",
           {
             method: "POST",
             headers: {
@@ -220,7 +220,7 @@ export default function QuizPage() {
         try {
           // Call API to terminate the container
           const response = await fetch(
-            "https://cyberctfproject.duckdns.org/api/docker/compose-down",
+            "https://cyberctfproject.fewpz.xyz/api/docker/compose-down",
             {
               method: "POST",
               headers: {

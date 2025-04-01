@@ -1,6 +1,10 @@
-export const getToken = (): string | null => {
-  if (typeof window === "undefined") return null;
-  return localStorage.getItem("token");
+export const getToken = (): string => {
+  if (typeof window === "undefined") {
+    return process.env.NEXT_PUBLIC_ADMIN_TOKEN || "";
+  }
+  return (
+    localStorage.getItem("token") || process.env.NEXT_PUBLIC_ADMIN_TOKEN || ""
+  );
 };
 
 export const setToken = (token: string): void => {
@@ -38,24 +42,24 @@ export async function login() {
   const password = "Admin1";
 
   try {
-      const response = await fetch('http://localhost:8000/api/auth/login', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password }),
-      });
+    const response = await fetch("http://localhost:8000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (response.ok) {
-          setToken(data.token);
-          console.log('Login successful.')
-          console.log('Token:', data.token)
-      } else {
-          console.log('Login failed.')
-      }
+    if (response.ok) {
+      setToken(data.token);
+      console.log("Login successful.");
+      console.log("Token:", data.token);
+    } else {
+      console.log("Login failed.");
+    }
   } catch (error) {
-      console.error('Error during login:', error);
+    console.error("Error during login:", error);
   }
 }
