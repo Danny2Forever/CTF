@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       containerId: result.containerId,
       sshUser: result.sshUser,
       sshPass: result.sshPass,
-      port: parseInt(result.port),
+      port: result.port,
       flagHash: result.flag,
     });
 

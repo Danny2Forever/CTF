@@ -23,6 +23,7 @@ const s3Client = new S3Client({
   credentials: {
     accessKeyId: serverRuntimeConfig.awsAccessKeyId ?? "",
     secretAccessKey: serverRuntimeConfig.awsSecretAccessKey ?? "",
+    sessionToken: serverRuntimeConfig.awsSessionToken ?? undefined,
   },
 });
 const s3Bucket = serverRuntimeConfig.s3Bucket ?? "mytsvcbucket";
@@ -40,7 +41,6 @@ export async function uploadImage(
       Key: key,
       Body: file.buffer,
       ContentType: file.mimetype,
-      ACL: "public-read" as const,
     };
     await s3Client.send(new PutObjectCommand(uploadParams));
     const location = `https://${s3Bucket}.s3.${serverRuntimeConfig.awsRegion}.amazonaws.com/${key}`;
