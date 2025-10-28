@@ -40,7 +40,7 @@ export async function submitCreateCourseForm(formData: FormData) {
     console.log("Token", token); // Log the token
 
     const response = await fetch(
-      "https://cyberctfproject.fewpz.xyz/api/courses",
+      "/api/courses",
       {
         method: "POST",
         headers: {
@@ -105,7 +105,7 @@ export async function submitCreateProblemForm(formData: FormData) {
       const token = getToken();
       console.log("Token", token); // Log the token 
       const response = await fetch(
-        "https://cyberctfproject.fewpz.xyz/api/problems/",
+        "/api/problems/",
         {
           method: "POST",
           headers: {

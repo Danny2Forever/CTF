@@ -35,7 +35,7 @@ async function createContainer(data: Container): Promise<ContainerResponse> {
     });
 
     const response = await fetch(
-      "https://cyberctfproject.fewpz.xyz/api/docker/create-compose",
+      "/api/docker/create-compose",
       {
         method: "POST",
         headers: {

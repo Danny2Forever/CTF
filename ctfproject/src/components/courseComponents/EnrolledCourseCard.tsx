@@ -29,7 +29,7 @@ const EnrolledCourseCard = ({ course }: { course: Course }) => {
             setUnenrollStatus("idle");
             const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
             
-            const response = await fetch(`https://cyberctfproject.fewpz.xyz/api/courses/${course.course_id}/unenroll`, {
+            const response = await fetch(`/api/courses/${course.course_id}/unenroll`, {
                 method: 'DELETE',
                 credentials: 'include',
                 headers: {

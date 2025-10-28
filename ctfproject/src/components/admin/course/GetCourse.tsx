@@ -13,7 +13,7 @@ export function getCourse(courseId: string) {
             try {
                 const token = localStorage.getItem('token') || process.env.NEXT_PUBLIC_ADMIN_TOKEN;
 
-                const courseResponse = await fetch(`https://cyberctfproject.fewpz.xyz/api/courses/${courseId}`,
+                const courseResponse = await fetch(`/api/courses/${courseId}`,
                     {
                     method: 'GET',
                     headers: {

@@ -71,7 +71,7 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({
 
         // Don't stringify FormData - send it directly
         const uploadRes = await fetch(
-          "https://cyberctfproject.fewpz.xyz/api/docker/upload-image",
+          "/api/docker/upload-image",
           {
             method: "POST",
             body: formData,
@@ -128,7 +128,7 @@ const UploadFileCard: React.FC<UploadFileCardProps> = ({
       setProcessingStatus("Building image... This may take a few minutes.");
 
       const res = await fetch(
-        "https://cyberctfproject.fewpz.xyz/api/docker/build-image",
+        "/api/docker/build-image",
         {
           method: "POST",
           body: JSON.stringify({ problemID: pro_id, problemName: pro_name }),
