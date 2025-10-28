@@ -1,8 +1,35 @@
 import Docker from "dockerode";
 import getConfig from "next/config";
+import * as os from "os";
 
 const { serverRuntimeConfig } = getConfig();
-const docker = new Docker({ host: serverRuntimeConfig.dockerHost });
+function getDockerConnection() {
+  const platform = os.platform();
+
+  // If explicitly configured, use that
+  if (serverRuntimeConfig.dockerHost) {
+    const host = serverRuntimeConfig.dockerHost.replace("tcp://", "");
+    const [hostname, port] = host.split(":");
+    return { host: hostname, port: parseInt(port || "2375") };
+  }
+
+  // Default: try socket first (works on Linux/Mac/WSL2)
+  if (platform === "linux" || platform === "darwin") {
+    return { socketPath: "/var/run/docker.sock" };
+  }
+
+  // Windows: use named pipe or TCP
+  if (platform === "win32") {
+    return { socketPath: "//./pipe/docker_engine" };
+    // Or use TCP if pipe doesn't work:
+    // return { host: "localhost", port: 2375 };
+  }
+
+  // Fallback
+  return { host: "localhost", port: 2375 };
+}
+
+const docker = new Docker(getDockerConnection());
 
 export async function composeUp(
   userName: string,
