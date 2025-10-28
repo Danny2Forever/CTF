@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "@/lib/db";
 import { users } from "@/lib/server/database/schema";
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: Request) {
     try {
-        const {username, password, email, phoneNumber, firstName, lastName} = req.body;
+        const {username, password, email, phoneNumber, firstName, lastName} = await req.json();
         if (!username || !password || !email || !phoneNumber || !firstName || !lastName) {
-            return res.status(400).json({ error: "Missing fields" });
+            return new Response('Missing fields', { status: 400 });
         }
         await db.insert(users).values({
             username,
@@ -16,8 +16,8 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
             firstName,
             lastName,
         });
-        return res.status(201).json({ message: "User registered successfully" });
+        return new Response('User registered successfully', { status: 201 });
     } catch (error) {
-        return res.status(500).json({ error: error instanceof Error ? error.message : "Register failed!" });
+        return new Response(error instanceof Error ? error.message : "Register failed!", { status: 500 });
     }
 }
