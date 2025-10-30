@@ -35,11 +35,10 @@ export async function POST(req: Request) {
       });
     }
 
-    return NextResponse.json(result);
+    return new Response(JSON.stringify(result), { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unknown error" },
-      { status: 500 }
-    );
+    return new Response(JSON.stringify({ error: "Failed to upload docker.tar to courses" }), {
+      status: 500,
+    });
   }
 }
