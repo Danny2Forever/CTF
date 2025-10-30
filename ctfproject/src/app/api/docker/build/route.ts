@@ -21,10 +21,10 @@ export async function POST(req: Request) {
       tag: `${problemName.toLowerCase()}-${problemID}:1.0.0`,
     });
 
-    return NextResponse.json(result);
+    return new Response(JSON.stringify(result), { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unknown error" },
+    return Response.json(
+      { error: error instanceof Error ? error.message : "Building Docker Image Error" },
       { status: 500 }
     );
   }

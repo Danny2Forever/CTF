@@ -2,9 +2,36 @@ import Docker from "dockerode";
 import crypto from "crypto";
 import * as net from "net";
 import getConfig from "next/config";
+import * as os from "os";
 
 const { serverRuntimeConfig } = getConfig();
-const docker = new Docker({ host: serverRuntimeConfig.dockerHost });
+function getDockerConnection() {
+  const platform = os.platform();
+
+  // If explicitly configured, use that
+  if (serverRuntimeConfig.dockerHost) {
+    const host = serverRuntimeConfig.dockerHost.replace("tcp://", "");
+    const [hostname, port] = host.split(":");
+    return { host: hostname, port: parseInt(port || "2375") };
+  }
+
+  // Default: try socket first (works on Linux/Mac/WSL2)
+  if (platform === "linux" || platform === "darwin") {
+    return { socketPath: "/var/run/docker.sock" };
+  }
+
+  // Windows: use named pipe or TCP
+  if (platform === "win32") {
+    return { socketPath: "//./pipe/docker_engine" };
+    // Or use TCP if pipe doesn't work:
+    // return { host: "localhost", port: 2375 };
+  }
+
+  // Fallback
+  return { host: "localhost", port: 2375 };
+}
+
+const docker = new Docker(getDockerConnection());
 
 interface TemplateData {
   username: string;
@@ -51,7 +78,29 @@ async function findRandomAvailablePort(
 
 export async function createContainer(data: TemplateData) {
   const imageName = `${data.problemName}-${data.problemID}:1.0.0`;
-  const image = await docker.getImage(imageName).inspect();
+  try {
+    await docker.ping();
+    console.log("Docker connection successful");
+  } catch (dockerError) {
+    console.error("Docker connection failed:", dockerError);
+    throw new Error(
+      `Docker not available: ${
+        dockerError instanceof Error ? dockerError.message : String(dockerError)
+      }`
+    );
+  }
+
+  // Check if image exists
+  let image;
+  try {
+    image = await docker.getImage(imageName).inspect();
+    console.log("Image found:", imageName);
+  } catch (imageError) {
+    console.error("Image not found:", imageName, imageError);
+    throw new Error(
+      `Image ${imageName} not found. Please build the image first.`
+    );
+  }
   const imagePorts = Object.keys(image.Config.ExposedPorts);
   const containerPort = imagePorts[0];
 

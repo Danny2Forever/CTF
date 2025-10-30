@@ -20,6 +20,7 @@ const s3Client = new S3Client({
   credentials: {
     accessKeyId: serverRuntimeConfig.awsAccessKeyId ?? "",
     secretAccessKey: serverRuntimeConfig.awsSecretAccessKey ?? "",
+    sessionToken: serverRuntimeConfig.awsSessionToken ?? undefined,
   },
 });
 

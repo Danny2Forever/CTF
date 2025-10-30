@@ -11,6 +11,7 @@ export async function POST(req: Request) {
             return new Response('Username and password are required', { status: 400 });
         }
         const user = await db.select().from(users).where(eq(users.username, username)).limit(1);
+        console.log(db)
         if (!user[0] || user[0].password !== password) {
             return new Response('Invalid credentials', { status: 401 });
         }
@@ -23,6 +24,10 @@ export async function POST(req: Request) {
         return new Response(JSON.stringify({ message: "Login successful", token }),
         { status: 200});
     } catch (error) {
-        return new Response(error instanceof Error ? error.message : "Login failed!", { status: 500 });
-    }
+    console.error("Login error:", error); // 👈 Add this line
+    return new Response(
+        error instanceof Error ? error.message : "Login failed!",
+        { status: 500 }
+    );
+}
 }
