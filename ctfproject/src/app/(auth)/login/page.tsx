@@ -5,6 +5,8 @@ import { Eye, EyeOff, Loader2, Flag } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useAuth } from "@/context/AuthContext";
+import { isAdmin } from "@/lib/authUtils";
 
 export interface LoginData {
   username: string;
@@ -19,17 +21,25 @@ export const VALIDATION_MESSAGES = {
 };
 
 const Signin = () => {
+  const { login, isLoggedIn, isAdmin } = useAuth(); 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-
+  
   // useEffect(() => {
   //   const token = localStorage.getItem('token');
   //   if (token) {
   //     router.push('/mycourse');
   //   }
   // }, [router]);
+  
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.replace("/courses");
+    }
+  }, [isLoggedIn, router]);
+  
   const submitLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -62,18 +72,15 @@ const Signin = () => {
       if (!response.ok) {
         throw new Error(data.message || "เข้าสู่ระบบไม่สำเร็จ");
       }
-
       if (data.token) {
-        document.cookie = `token=${data.token}; path=/; max-age=${60 * 60 * 24 * 7}`; // 7 days expiration
-      } else {
-        console.warn('No token received from the server');
+        login(data.token); // update context & localStorage
       }
-
+      
       toast.success("เข้าสู่ระบบสำเร็จ", {
         duration: 3000,
         position: "bottom-right",
       });
-      router.push("/mycourse");
+      router.push("/courses");
     } catch (error) {
       const errorMessage =
         error instanceof Error &&

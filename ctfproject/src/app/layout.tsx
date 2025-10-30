@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
 import AOSProvider from "../components/AOSProvider";
+import { AuthProvider } from "@/context/AuthContext";
 
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} font-sans`}>
+        <AuthProvider>
         <AOSProvider>
           <Navbar />
 
@@ -52,6 +54,7 @@ export default function RootLayout({
           }}
         />
         <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

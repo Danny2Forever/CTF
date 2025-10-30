@@ -1,11 +1,11 @@
 "use client"
 
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useEffect } from 'react';
 import { Eye, EyeOff, Loader2, Flag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from "sonner"
-
+import { useAuth } from "@/context/AuthContext";
 
 export interface RegisterFormData {
     username: string;
@@ -27,11 +27,18 @@ export interface RegisterFormData {
   
 
 const Register = () => {
+  const { isLoggedIn } = useAuth();
   const [showPassword, setShowPassword] =  useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =  useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.replace("/courses");
+    }
+  }, [isLoggedIn, router]);
+  
   const submitRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);

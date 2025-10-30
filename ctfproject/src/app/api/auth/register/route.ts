@@ -11,7 +11,7 @@ export async function POST(req: Request) {
             return new Response('Missing fields', { status: 400 });
         }
 
-        const existingUser = await db
+         const existingUser = await db
         .select()
         .from(users)
         .where(
@@ -23,23 +23,33 @@ export async function POST(req: Request) {
         .limit(1);
 
         if (existingUser.length > 0) {
-        return new Response(JSON.stringify({ error: "Username or email already taken" }), { status: 409 });
+        return new Response(
+            JSON.stringify({ error: "Username or email already taken" }),
+            { status: 409 }
+        );
         }
 
-        const [newUser] = await db.insert(users).values({
+        // Insert new user (default role = "user")
+        const [newUser] = await db
+        .insert(users)
+        .values({
             username,
             password,
             email,
             phoneNumber,
             firstName,
             lastName,
-        }).returning();
+            role: "user" // <-- make sure the role column exists in your schema
+        })
+        .returning();
 
+        // Sign JWT including role
         const token = jwt.sign(
-            { id: newUser.id, username: newUser.username },
-            process.env.JWT_SECRET!,
-            { expiresIn: "1h" }
+        { id: newUser.id, username: newUser.username, role: newUser.role }, // role must be here
+        process.env.JWT_SECRET!,
+        { expiresIn: "1h" }
         );
+
 
 
         return new Response(JSON.stringify({ message: "User registered successfully", token }), { status: 201 });

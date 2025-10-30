@@ -15,6 +15,13 @@
       "when": 1761827361216,
       "tag": "0001_special_carnage",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1761849578204,
+      "tag": "0002_kind_synch",
+      "breakpoints": true
     }
   ]
 }

@@ -7,13 +7,22 @@ import { motion } from "motion/react";
 import { ChevronRight, Flag, Trophy, Users, Clock, Shield, Terminal, Brain, Code, Lock } from "lucide-react";
 import { TeamMember } from "@/components/landing/team";
 import { useRouter } from "next/navigation";
-
+import { useAuth } from "@/context/AuthContext";
 
 const Page = () => {
   const [activeChallenge, setActiveChallenge] = useState(0);
+  const { isLoggedIn } = useAuth();
 
   const router = useRouter();
   
+  const handleClick = () => {
+    if (!isLoggedIn) {
+      router.push("/login");
+    } else {
+      router.push("/courses");
+    }
+  };
+
   const challenges = [
     { 
       id: 1, 
@@ -152,7 +161,7 @@ const Page = () => {
             KMITL School of IT's Capture The Flag Learning platform. Test your cybersecurity skills, collaborate with peers, and capture the flag!
           </p>
           <div className="flex flex-wrap gap-4">
-            <Button size="lg" onClick={() => router.push("/login")} className="bg-blue-600 hover:bg-blue-700 cursor-pointer hover:scale-105 duration-300 transition">
+            <Button size="lg" onClick={handleClick} className="bg-blue-600 hover:bg-blue-700 cursor-pointer hover:scale-105 duration-300 transition">
               Join Challenge <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
             <Button

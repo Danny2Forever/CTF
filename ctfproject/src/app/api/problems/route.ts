@@ -22,11 +22,17 @@ export async function POST(req: Request) {
 
 
 export async function GET() {
-    try{
-        const allProblems = await db.select().from(problems);
-        return allProblems
+  try {
+    const allProblems = await db.select().from(problems);
 
-    } catch (error) {
-        return new Response(error instanceof Error ? error.message : "The problems not found", { status: 404 });
-    }
+    return new Response(JSON.stringify(allProblems), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    return new Response(
+      error instanceof Error ? error.message : "The problems not found",
+      { status: 500 }
+    );
+  }
 }

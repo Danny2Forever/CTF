@@ -72,7 +72,7 @@ const AdminCourseDetail = ({ courseId }: { courseId: string }) => {
             </div>
             
             <h2 className="text-3xl font-bold text-gray-800 mb-1">
-              {formatCourseName(course.course_name)}
+              {formatCourseName(course.courseame)}
             </h2>
             
             {user && (

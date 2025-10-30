@@ -76,10 +76,10 @@ export default function Course() {
     <div className="min-h-screen flex flex-col items-center bg-gray-50 p-4 md:p-8">
       <div className="bg-white p-6 w-full max-w-5xl rounded-2xl shadow-xl overflow-hidden">
         {/* Course Header */}
-        <CourseHeader title={course.course_name} />
+        <CourseHeader title={course.courseName} />
         
         {/* Course Description */}
-        <CourseDescription description={course.description} />
+        <CourseDescription description={course.courseDescription} />
         
         {/* Navigation Tabs */}
         <div className="border-b border-gray-200 px-6 pt-4 pb-0">
@@ -97,7 +97,7 @@ export default function Course() {
         {/* Dynamic Content Area */}
         <div className="p-6">
           {currentView === CourseViewType.Outline ? (
-            <OutlineContainer course_id={course.course_id} />
+            <OutlineContainer course_id={course.id} />
           ) : (
             <div className="text-center text-gray-500 py-12">
               Resources section coming soon
