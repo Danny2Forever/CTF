@@ -19,14 +19,14 @@ export interface FileData {
 }
 
 const s3Client = new S3Client({
-  region: serverRuntimeConfig.awsRegion ?? "ap-southeast-2",
+  region: serverRuntimeConfig.awsRegion ?? "us-east-1",
   credentials: {
     accessKeyId: serverRuntimeConfig.awsAccessKeyId ?? "",
     secretAccessKey: serverRuntimeConfig.awsSecretAccessKey ?? "",
     sessionToken: serverRuntimeConfig.awsSessionToken ?? undefined,
   },
 });
-const s3Bucket = serverRuntimeConfig.s3Bucket ?? "mytsvcbucket";
+const s3Bucket = serverRuntimeConfig.s3Bucket ?? "ctf-tae-storage";
 
 export async function uploadImage(
   file: FileData,
