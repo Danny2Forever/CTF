@@ -24,20 +24,24 @@ export const courses = pgTable("courses", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const problems = pgTable("problems", {
-  id: serial("id").primaryKey(),
-  problemName: text("problem_name").notNull(),
-  problemDescription: text("problem_description").notNull(),
-  courseId: integer("course_id").notNull().references(() => courses.id),
-  dockerImageId: text("docker_images").notNull().references(() => dockerImages.id),
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
 export const dockerImages = pgTable("docker_images", {
   id: serial("id").primaryKey(),
   problemName: text("problem_name").notNull(),
   problemID: integer("problem_id").notNull(),
   tag: text("tag").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const problems = pgTable("problems", {
+  id: serial("id").primaryKey(),
+  problemName: text("problem_name").notNull(),
+  problemDescription: text("problem_description").notNull(),
+  courseId: integer("course_id")
+    .notNull()
+    .references(() => courses.id),
+  dockerImageId: integer("docker_image_id") // Changed from text to integer
+    .notNull()
+    .references(() => dockerImages.id),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
