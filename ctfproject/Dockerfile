@@ -10,16 +10,16 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN pnpm install
+RUN npm install
 
 # Copy application code
 COPY . .
 
 # Build the Next.js application
-RUN pnpm run build
+RUN npm run build
 
 # Expose port
 EXPOSE 3000
 
 # Start the application
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
