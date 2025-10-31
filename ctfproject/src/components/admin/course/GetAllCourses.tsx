@@ -31,27 +31,7 @@ export function getAllCourses() {
         }
 
         const data: AllCourses = await response.json();
-        for (let i = 0; i < data.length; i++) {
-          const permission = await fetch(
-            `/api/roles/my-permissions/${data[i].course_id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-          );
-          const permissionData: Permissions = await permission.json();
-          if (
-            !permissionData.coursePermissions.find(
-              (element) => element === "add_problem"
-            )
-          ) {
-            data.splice(i, 1);
-            i--;
-          }
-        }
+        
         setCourses(data);
         setIsLoading(false);
       } catch (err) {

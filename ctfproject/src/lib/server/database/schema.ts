@@ -15,6 +15,7 @@ export const users = pgTable("users", {
   email: text("email").notNull(),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
+  role: varchar("role", { length: 20 }).notNull().default("user"),
 });
 
 export const courses = pgTable("courses", {
